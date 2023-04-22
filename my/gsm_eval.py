@@ -4,7 +4,7 @@ import argparse
 import tqdm
 import os
 
-from interface import ProgramInterface
+from interface import MyProgramInterface
 from prompt import MATH_PROMPT
 
 import openai
@@ -14,7 +14,6 @@ openai.api_key = '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'
 
 parser = argparse.ArgumentParser()
 args = parser.parse_args()
-args.model = 'text-davinci-003'
 args.dataset = 'gsm'  # TODO: здесь обучающие вопросы
 args.append = False  # добавляются ли данные или перезаписываются
 args.temperature = 0.0
@@ -29,14 +28,16 @@ args.majority_at = None  # todo??
 
 DATA_PATH = f'gsmhardv2.jsonl'
 OUTPUT_PATH = f'eval_results/{args.dataset}.jsonl'
+MODEL = 'text-davinci-003'
+MODEL = 'gpt-3.5-turbo'
 os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
 
 examples = list(map(json.loads, open(DATA_PATH)))
 examples = examples[:10]
-itf = ProgramInterface(
+itf = MyProgramInterface(
     stop='\n\n\n',
     get_answer_expr='solution()',
-    model=args.model,
+    model=MODEL,
     verbose=True
 )
 

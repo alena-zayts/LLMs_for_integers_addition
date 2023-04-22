@@ -149,3 +149,9 @@ Q: {question}
 # solution in Python:
 '''.strip() + '\n\n\n'
 
+
+# MATH_PROMPT = '''
+# Q: {question}
+#
+# # solution in Python:
+# '''.strip() + '\n\n\n'

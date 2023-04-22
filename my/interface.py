@@ -5,6 +5,7 @@ import time
 import io
 from contextlib import redirect_stdout
 
+
 class GenericRuntime:
     GLOBAL_DICT = {}
     LOCAL_DICT = None
@@ -33,26 +34,23 @@ class GenericRuntime:
 
 
 
-class ProgramInterface:
+class MyProgramInterface:
 
     def __init__(
             self,
             model: str = 'code-davinci-002',
-            stop: str = '\n\n',
-            get_answer_symbol: Optional[str] = None,
-            get_answer_expr: Optional[str] = None,
-            get_answer_from_stdout: bool = False,
+            stop: str = '\n\n\n',
+            get_answer_expr: str = None,
             verbose: bool = False
     ) -> None:
 
         self.model = model
+        self.stop = stop
+        self.answer_expr = get_answer_expr
+        self.verbose = verbose
+
         self.runtime = GenericRuntime()
         self.history = []
-        self.stop = stop
-        self.answer_symbol = get_answer_symbol
-        self.answer_expr = get_answer_expr
-        self.get_answer_from_stdout = get_answer_from_stdout
-        self.verbose = verbose
 
     def clear_history(self):
         self.history = []
@@ -72,21 +70,9 @@ class ProgramInterface:
 
     def execute(self, code: Optional[List[str]] = None):
         code = code if code else self.code
-        if self.get_answer_from_stdout:
-            program_io = io.StringIO()
-            with redirect_stdout(program_io):
-                self.runtime.exec_code('\n'.join(code))
-            program_io.seek(0)
-            return program_io.readlines()[-1]
-        elif self.answer_symbol:
-            self.runtime.exec_code('\n'.join(code))
-            return self.runtime._global_vars[self.answer_symbol]
-        elif self.answer_expr:
-            self.runtime.exec_code('\n'.join(code))
-            return self.runtime.eval_code(self.answer_expr)
-        else:
-            self.runtime.exec_code('\n'.join(code[:-1]))
-            return self.runtime.eval_code(code[-1])
+        self.runtime.exec_code('\n'.join(code))
+        return self.runtime.eval_code(self.answer_expr)
+
 
     def run(self, prompt: str, time_out: float = 10, temperature: float = 0.0, top_p: float = 1.0,
             max_tokens: int = 512, majority_at: int = None):

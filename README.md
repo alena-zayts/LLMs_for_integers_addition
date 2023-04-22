@@ -156,6 +156,9 @@ https://platform.openai.com/docs/model-index-for-researchers
 еще работает gpt-3.5-turbo
 
 
+а  Declarative solutionsб описанные в word_math_problems -- подходят для более сложных
+
+
 
 
 
