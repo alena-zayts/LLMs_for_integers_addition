@@ -134,3 +134,28 @@ Extrapolation is hardly achieved when trained on fewer than 50 digits, regardles
 
 ## текущая идея
 использовать интерпретатор из PAL, носпецифицировать его именно на суммирование, используя идеи investigationg
+
+
+
+
+## пошла искать, кто ссылается на investigationg
+
+https://ojs.aaai.org/index.php/AAAI/article/view/20841
+
+https://arxiv.org/abs/2103.13136
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
