@@ -144,6 +144,17 @@ https://ojs.aaai.org/index.php/AAAI/article/view/20841
 
 https://arxiv.org/abs/2103.13136
 
+2 подхода -- пытаться лучше представить числа или в интерпретатор 
+
+еще про CoT сказать но вот есть еще и такое
+
+
+
+моделей тех нет, взяла лучшее 
+https://platform.openai.com/docs/model-index-for-researchers
+
+еще работает gpt-3.5-turbo
+
 
 
 
