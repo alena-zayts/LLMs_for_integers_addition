@@ -169,13 +169,25 @@ https://platform.openai.com/docs/model-index-for-researchers
 
 
 
+о том, что использую в первом способе -- вот, из word_math_problems:
+можно сказать что вот видела интерпретатор, и как тут декларативный
+Few-shot prompting is a technique that uses LLMs to solve a task by providing the LLMs with
+a few demonstrations of the task as part of the input at inference time [1].
 
 
 
 
+python main.py --output_dir=.  --model_name_or_path=t5-base --operation=addition --orthography=10ebased --train_size=100 --val_size=10 --test_size=10 --min_digits_train=2  --max_digits_train=15 --min_digits_test=2 --max_digits_test=15 --base_number=10 --seed=1 --max_epochs=10 --check_val_every_n_epoch=2
+ 
+ 
+все ограничено разрядной сеткой, так что давайте лучше разделять на части
 
+начнем с первого, что приходит в голову
 
-
+3 варианта 
+Питон без итерации
+Питон с итерацией
+Без питона
 
 
 

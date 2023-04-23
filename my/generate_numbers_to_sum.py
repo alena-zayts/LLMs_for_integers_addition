@@ -1,19 +1,18 @@
 import random
 import json
-import random
-random.seed(0)
-from prompts_formatting import code_for_one_task, header_for_one_task, full_question_with_code_for_one_task
 
-def go(filename='my_test.jsonl', n_reapeats=50):
+random.seed(0)
+
+min_e = 1e20
+max_e = 1e30
+def go(filename='test_examples.jsonl', n_reapeats=50):
     with open(filename, 'w') as f:
         for i in range(n_reapeats):
-            a = random.randint(-10000000, 1000000)
-            b = random.randint(-10000000, 1000000)
+            a = random.randint(int(min_e), int(max_e))
+            b = random.randint(int(min_e), int(max_e))
             example = {
                 'a': a,
                 'b': b,
-                # 'input': header_for_one_task(a, b),
-                # 'code': code_for_one_task(a, b),
                 'target': a + b
             }
 
