@@ -3,14 +3,15 @@ import json
 import argparse
 import tqdm
 import os
-
-from interface import MyProgramInterface
-from prompt import MATH_PROMPT
-
 import openai
+from interface import MyProgramInterface
+from prompts_formatting import code_for_one_task, header_for_one_task, full_question_with_code_for_one_task, \
+    generate_prompt
+
 openai.api_key = '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'
 
-
+# from prompt import MATH_PROMPT
+MATH_PROMPT = generate_prompt()
 
 parser = argparse.ArgumentParser()
 args = parser.parse_args()
@@ -25,10 +26,9 @@ args.top_p = 1.0  # TODO
 args.max_tokens = 256  # TOD
 args.majority_at = None  # todo??
 
-
-DATA_PATH = f'gsmhardv2.jsonl'
+DATA_PATH = f'my_test.jsonl'
 OUTPUT_PATH = f'eval_results/{args.dataset}.jsonl'
-MODEL = 'text-davinci-003'
+# MODEL = 'text-davinci-003'
 MODEL = 'gpt-3.5-turbo'
 os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
 
@@ -52,14 +52,14 @@ else:
 with open(OUTPUT_PATH, 'a' if args.append else 'w') as f:
     pbar = tqdm.tqdm(examples[num_skip_exps:], initial=num_skip_exps, total=len(examples))
     for x in pbar:
-        question = x['input']
+        a, b = x['a'], x['b']
+        question = MATH_PROMPT.format(a=a, b=b)
         result = copy.copy(x)
-        
+
         try:
-            ans = itf.run(MATH_PROMPT.format(
-                question=question), majority_at=args.majority_at, 
-                temperature=args.temperature, top_p=args.top_p,
-                max_tokens=args.max_tokens)
+            ans = itf.run(question, majority_at=args.majority_at,
+                          temperature=args.temperature, top_p=args.top_p,
+                          max_tokens=args.max_tokens)
             ans = float(ans)
             score = 1 if abs(ans - x['target']) < 1e-3 else 0
         except Exception as e:
@@ -67,13 +67,40 @@ with open(OUTPUT_PATH, 'a' if args.append else 'w') as f:
             ans = ''
             score = 0
         scores.append(score)
-        
+
         result['answer'] = ans
         result['score'] = score
         result['generation'] = itf.history
         f.write(json.dumps(result) + '\n')
-        
+
         itf.clear_history()
         f.flush()
+
+# with open(OUTPUT_PATH, 'a' if args.append else 'w') as f:
+#     pbar = tqdm.tqdm(examples[num_skip_exps:], initial=num_skip_exps, total=len(examples))
+#     for x in pbar:
+#         question = x['input']
+#         result = copy.copy(x)
+#
+#         try:
+#             ans = itf.run(MATH_PROMPT.format(
+#                 question=question), majority_at=args.majority_at,
+#                 temperature=args.temperature, top_p=args.top_p,
+#                 max_tokens=args.max_tokens)
+#             ans = float(ans)
+#             score = 1 if abs(ans - x['target']) < 1e-3 else 0
+#         except Exception as e:
+#             print(e)
+#             ans = ''
+#             score = 0
+#         scores.append(score)
+#
+#         result['answer'] = ans
+#         result['score'] = score
+#         result['generation'] = itf.history
+#         f.write(json.dumps(result) + '\n')
+#
+#         itf.clear_history()
+#         f.flush()
 
 print(f'Accuracy - {sum(scores) / len(scores)}')
