@@ -28,6 +28,13 @@ The quality will be measured on a randomly generated set of numbers of different
 
 # Literature review: 
 
+Recently, LLMs have shown impressive success on a wide range of tasks, including mathematical (Lewkowycz et al., 2022; Wu et al., 2022; Mishra et al., 2022) reasoning. 
+Nevertheless, while LLMs can perform simple arithmetic operations, their performance falls dramatically when dealing with large numbers ([[a]](#6)). In fact, 
+even when fine-tuning a PaLM-based model
+on 164B tokens of explicit mathematical content, one of its two
+most common failures is “incorrect calculation” (Lewkowycz et al., 2022).
+
+
 The first possible direction of solving the problem of addition of two long integers is to 'teach' language models the process of reasoning.
 
 
@@ -87,14 +94,16 @@ S., Michalewski, H., Garcia, X., Misra, V., Robinson,
 K., Fedus, L., Zhou, D., Ippolito, D., Luan, D., Lim,
 H., Zoph, B., Spiridonov, A., Sepassi, R., Dohan, D.,
 Agrawal, S., Omernick, M., Dai, A. M., Pillai, T. S.,
-Pellat, M., Lewkowycz, A., Moreira, E., Child, R., Polozov, O., Lee, K., Zhou, Z., Wang, X., Saeta, B., Diaz,
+Pellat, M., Lewkowycz, A., Moreira, E., Child, R., Polozov, O., Lee, K., Zhou, Z., Wang, X., Saeta, B., Diaz,
 M., Firat, O., Catasta, M., Wei, J., Meier-Hellstern, K.,
-Eck, D., Dean, J., Petrov, S., and Fiedel, N. PaLM: Scaling Language Modeling with Pathways. arXiv preprint
-arXiv:2204.02311, 2022.
+Eck, D., Dean, J., Petrov, S., and Fiedel, N. PaLM: Scaling Language Modeling with Pathways. arXiv preprint
+arXiv:2204.02311, 2022.  https://arxiv.org/abs/2204.02311
+
+<a id="6">[6]</a> 
+Nogueira, R., Jiang, Z., & Lin, J. (2021). Investigating the Limitations of Transformers with Simple Arithmetic Tasks. https://arxiv.org/abs/2102.13019
 
 
-
-
+## Мое
 Word_math_problems_april_23 -- слишком большая для нашей задачи
 
 Word_math_problems_april_23 -> PAL: Program-aided Language Models (который вышел раньше)
