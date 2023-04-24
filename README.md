@@ -44,7 +44,7 @@ even when fine-tuning a PaLM-based model on 164B tokens of explicit mathematical
 most common failures is “incorrect calculation” [[7]](#7).
 
 That's why it is worth considering a slightly different approach.
-Papers [[2]](#2) and [[3]](#3) go in approximately in the same direction but use few-shot prompting in some **algorithmic form** ([[4]](#4), [5]](#5)).
+Papers [[2]](#2) and [[3]](#3) go in approximately in the same direction but use few-shot prompting in some kind of **algorithmic form** ([[4]](#4), [5]](#5)).
 
 - Proposed in [[3]](#3) approach uses the LLM to read natural language problems and generate programs as the intermediate
 reasoning steps, but offloads the solution step to a runtime (**Python interpreter**)
@@ -61,18 +61,23 @@ in this approach there disappear almost all limits for the length of numbers to 
  
 **That's why my first solution was mostly inspired by and based on paper [[3]](#3)**
 
+
+
 Here are some more interesting insights from [[3]](#3)
 
+**Large Numbers or Incorrect Reasoning**
+Они пытались понять ,почему ошибаются LLMs -- проблем с переводом или больщими числами
+
+the primary failure mode is the inability to perform arithmetic accurately
+
+ЭТО ОЧЕНЬ ВАЖНО!!!!!!!!!!!!!!
+ТО ЕСТЬ НАДО НЕ ОСТАВЛЯТЬ ВЫЧИСЛЕНИЯ МОДЕЛИ, А В ПИТОН
 
 
-Few-shot prompting leverages the strength of large-language
-models to solve a task with a set of k examples that are provided as part of the test-time input ([4]](#4), [5]](#5)), where k is usually a number in the low single digits. These input-output
-examples {(xi, yi)}, i=1;k are concatenated in a prompt p ≡ (x1 · y1) || (x2 · y2) || ... || (xk · yk). where “·” denotes
-the concatenation of an input and output, and “||” indicate
-the concatenation of different examples. During inference,
-a test instance xtest is appended to the prompt, and p k xtest
-is passed to the model which attempts to complete p k xtest,
-and thereby generate an answer ytest. Note that such fewshot prompting does not modify the underlying LLM.
+**Это именно засчет использования  интерпретатора или из-за того, что больше данных prompts (впрямую считай)**
+интерпретатор
+
+
 
 
 
@@ -127,34 +132,32 @@ Gur-Ari, G., and Misra, V. Solving quantitative reasoning problems with language
 arXiv:2206.14858, 2022. https://arxiv.org/abs/2206.14858
 
 
-## PAL
-http://reasonwithpal.com .
+# Solution 1. few-shot with python interpreter
 
-Главное -- переводить вычисления в код.
+Few-shot prompting leverages the strength of large-language
+models to solve a task with a set of k examples that are provided as part of the test-time input ([4]](#4), [5]](#5)), where k is usually a number in the low single digits. These input-output
+examples {(xi, yi)}, i=1;k are concatenated in a prompt p ≡ (x1 · y1) || (x2 · y2) || ... || (xk · yk). where “·” denotes
+the concatenation of an input and output, and “||” indicate
+the concatenation of different examples. During inference,
+a test instance xtest is appended to the prompt, and p k xtest
+is passed to the model which attempts to complete p k xtest,
+and thereby generate an answer ytest. Note that such fewshot prompting does not modify the underlying LLM.
 
-**В PAL они заметили, что в датасетах маленькие числа и решили их увеличить до 7-ми значных**
+ограничение -- по max_tokens
 
-GSM-HARD LLMs can perform simple calculations with
-small numbers. However, Madaan & Yazdanbakhsh (2022)
-found that 50% of the numbers in the popular GSM8K
-dataset of math reasoning problems are integers between 0
-and 8. This raises the question of whether LLMs can generalize to larger and non-integer numbers? We constructed a
-harder version of GSM8K, which we call GSM-HARD, by replacing the numbers in the questions of GSM8K with larger
-numbers. Specifically, one of the numbers in a question
-was replaced with a random integer of up to 7 digits. More
-details regarding the this new dataset are provided in H.1.
+### каую модель за базу
+they used
+The Codex models are now deprecated.
 
-**Large Numbers or Incorrect Reasoning**
-Они пытались понять ,почему ошибаются LLMs -- проблем с переводом или больщими числами
+моделей тех нет, взяла лучшее 
+https://platform.openai.com/docs/model-index-for-researchers
 
-the primary failure mode is the inability to perform arithmetic accurately
+еще работает gpt-3.5-turbo
 
-ЭТО ОЧЕНЬ ВАЖНО!!!!!!!!!!!!!!
-ТО ЕСТЬ НАДО НЕ ОСТАВЛЯТЬ ВЫЧИСЛЕНИЯ МОДЕЛИ, А В ПИТОН
+в оригинале использовался davinci code, у меня -- текст
 
 
-**Это именно засчет использования  интерпретатора или из-за того, что больше данных prompts (впрямую считай)**
-интерпретатор
+
 
 
 
@@ -219,19 +222,6 @@ Extrapolation is hardly achieved when trained on fewer than 50 digits, regardles
 
 **нет смысла увеличивать обучающую выборку И на каком-то шаге обучения качество начинает падать, так что надо находить наилучший результат из промежуточных**
 
-
-## текущая идея
-
-
-### каую модель за базу
-моделей тех нет, взяла лучшее 
-https://platform.openai.com/docs/model-index-for-researchers
-
-еще работает gpt-3.5-turbo
-
-в оригинале использовался davinci code, у меня -- текст
-
-ограничение -- по max_tokens
 
 
 
