@@ -28,23 +28,36 @@ The quality will be measured on a randomly generated set of numbers of different
 
 # Literature review: 
 
-Recently, LLMs have shown impressive success on a wide range of tasks, including mathematical (Lewkowycz et al., 2022; Wu et al., 2022; Mishra et al., 2022) reasoning. 
-Nevertheless, while LLMs can perform simple arithmetic operations, their performance falls dramatically when dealing with large numbers ([[a]](#6)). In fact, 
-even when fine-tuning a PaLM-based model
-on 164B tokens of explicit mathematical content, one of its two
-most common failures is “incorrect calculation” (Lewkowycz et al., 2022).
 
 
-The first possible direction of solving the problem of addition of two long integers is to 'teach' language models the process of reasoning.
+The first possible direction of solving the problem of addition of two long integers as one of the mathematical problems is to 'teach' language models the process of reasoning.
+
+Recently, LLMs have shown impressive success on a wide range of tasks, including mathematical, using this approach.
+
+For example, paper [[1]](#1) demonstrates that by fine-tuning an autoregressive language model (GPT-Neo) on appropriately structured step-by-step demonstrations **in a text form**, it is possible to teach it to execute 
+a mathematical task that has previously proved difficult for Transformers – longhand modulo  operations – with a relatively small number of examples. 
+
+Nevertheless, while LLMs can 'themselves' perform simple arithmetic operations, their performance falls dramatically when dealing with large numbers ([[6]](#6)). In fact, 
+even when fine-tuning a PaLM-based model on 164B tokens of explicit mathematical content, one of its two
+most common failures is “incorrect calculation” [[7]](#7).
+
+That's why it is worth considering a slightly different approach.
+Papers [[2]](#2) and [[3]](#3) go in approximately in the same direction but use few-shot prompting in some **algorithmic form** ([[4]](#4), [5]](#5)).
+
+- Proposed in [[3]](#3) approach uses the LLM to read natural language problems and generate programs as the intermediate
+reasoning steps, but offloads the solution step to a runtime (**Python interpreter**)
+
+- Proposed in [[2]](#2) approach combines an LLM that can incrementally formalize word problems as a set of variables and 
+equations with an external **symbolic solver** that can solve them
+
+It has been shown in [[2]](#2) that their approach is more effective for more difficult problems that require declarative reasoning while the 
+results on simple tasks like ours (addition of two long integers) [[2]](#2) and [[3]](#3) show comparable results.
 
 
-Paper [[1]](#1) demonstrates that by fine-tuning an autoregressive language model (GPT-Neo) on appropriately structured step-by-step demonstrations *in a text form*, it is possible to teach it to execute 
-a mathematical task that has previously proved difficult for Transformers – longhand modulo 
-operations – with a relatively small number of examples. 
-
-Other two papers [[2]](#2) and [[3]](#3) go in approximately in the same direction but use few-shot prompting ([4]](#4), [5]](#5)), namely , some *algorithmic form* of prompts.
-
-
+Moreover, since python 3 has no more limit to value of integers(https://docs.python.org/3/whatsnew/3.0.html#integers), 
+in this approach there disappear almost all limits for the length of numbers to sum.
+ 
+**That's why my first solution was mostly inspired by and based on paper [[3]](#3)**
 
 
 
@@ -101,6 +114,13 @@ arXiv:2204.02311, 2022.  https://arxiv.org/abs/2204.02311
 
 <a id="6">[6]</a> 
 Nogueira, R., Jiang, Z., & Lin, J. (2021). Investigating the Limitations of Transformers with Simple Arithmetic Tasks. https://arxiv.org/abs/2102.13019
+
+<a id="7">[7]</a> 
+Lewkowycz, A., Andreassen, A., Dohan, D., Dyer, E.,
+Michalewski, H., Ramasesh, V., Slone, A., Anil, C.,
+Schlag, I., Gutman-Solo, T., Wu, Y., Neyshabur, B.,
+Gur-Ari, G., and Misra, V. Solving quantitative reasoning problems with language models. arXiv preprint
+arXiv:2206.14858, 2022. https://arxiv.org/abs/2206.14858
 
 
 ## Мое
