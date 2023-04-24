@@ -34,8 +34,10 @@ The first possible direction of solving the problem of addition of two long inte
 
 Recently, LLMs have shown impressive success on a wide range of tasks, including mathematical, using this approach.
 
-For example, paper [[1]](#1) demonstrates that by fine-tuning an autoregressive language model (GPT-Neo) on appropriately structured step-by-step demonstrations **in a text form**, it is possible to teach it to execute 
+For example, paper [[1]](#1) demonstrates that by fine-tuning an autoregressive language model (GPT-Neo) on appropriately structured step-by-step demonstrations, it is possible to teach it to execute 
 a mathematical task that has previously proved difficult for Transformers – longhand modulo  operations – with a relatively small number of examples. 
+ Their demonstrations are presented in a widely used **chain-of-thought (COT)** form.
+
 
 Nevertheless, while LLMs can 'themselves' perform simple arithmetic operations, their performance falls dramatically when dealing with large numbers ([[6]](#6)). In fact, 
 even when fine-tuning a PaLM-based model on 164B tokens of explicit mathematical content, one of its two
@@ -58,6 +60,8 @@ Moreover, since python 3 has no more limit to value of integers(https://docs.pyt
 in this approach there disappear almost all limits for the length of numbers to sum.
  
 **That's why my first solution was mostly inspired by and based on paper [[3]](#3)**
+
+Here are some more interesting insights from [[3]](#3)
 
 
 
@@ -123,19 +127,6 @@ Gur-Ari, G., and Misra, V. Solving quantitative reasoning problems with language
 arXiv:2206.14858, 2022. https://arxiv.org/abs/2206.14858
 
 
-## Мое
-Word_math_problems_april_23 -- слишком большая для нашей задачи
-
-Word_math_problems_april_23 -> PAL: Program-aided Language Models (который вышел раньше)
-
-Оттуда their performance falls dramatically when dealing with complex arithmetic (Hendrycks et al., 2021; Madaan & Yazdanbakhsh,
-2022) or large numbers (Nogueira et al., 2021; Qian et al., 2022).
-
-Вот эта статья про арифметику
-https://arxiv.org/abs/2102.13019 (
-код https://github.com/castorini/transformers-arithmetic
-INVESTIGATING_THE_LIMITATIONS_OF_TRANSFORM_apr21
-
 ## PAL
 http://reasonwithpal.com .
 
@@ -161,18 +152,11 @@ the primary failure mode is the inability to perform arithmetic accurately
 ЭТО ОЧЕНЬ ВАЖНО!!!!!!!!!!!!!!
 ТО ЕСТЬ НАДО НЕ ОСТАВЛЯТЬ ВЫЧИСЛЕНИЯ МОДЕЛИ, А В ПИТОН
 
-**На более простых моделях?**
-
-PAL with COT при более простой базе. PAL -- всегда лучше
 
 **Это именно засчет использования  интерпретатора или из-за того, что больше данных prompts (впрямую считай)**
 интерпретатор
 
 
-**ссылка на упрощение**
-Several prior works have
-equipped neural models with specialized modules. For example, Cobbe et al. (
-2021) employ a calculator for arithmetic operations as a post hoc processing,
 
 
 
@@ -237,74 +221,32 @@ Extrapolation is hardly achieved when trained on fewer than 50 digits, regardles
 
 
 ## текущая идея
-использовать интерпретатор из PAL, носпецифицировать его именно на суммирование, используя идеи investigationg
 
 
-
-
-## пошла искать, кто ссылается на investigationg
-
-https://ojs.aaai.org/index.php/AAAI/article/view/20841
-
-https://arxiv.org/abs/2103.13136
-
-2 подхода -- пытаться лучше представить числа или в интерпретатор 
-
-еще про CoT сказать но вот есть еще и такое
-
-
-
+### каую модель за базу
 моделей тех нет, взяла лучшее 
 https://platform.openai.com/docs/model-index-for-researchers
 
 еще работает gpt-3.5-turbo
 
+в оригинале использовался davinci code, у меня -- текст
 
-а  Declarative solutionsб описанные в word_math_problems -- подходят для более сложных
-
-
-Здравствуйте. Появились вопросы по поводу того, в каком формате будут предоставляться входные данные.
-
-1. В каждом примере будут складываться только 2 числа или произвольное их количество?
-2. Складываемые числа -- любые или есть какие-то ограничения? (например, только целые, или только целые неотрицательные)
-3. Как именно требуется передавать задачу в модель?  
-	а) Будут даны только числа, а как их передавать в модель -- на мое усмтрение.
-	б) Будет сразу дано некоторое предложение на естественном языке, содержащее задачу о суммировании чисел, которое нужно именно в таком виде (без изменений) передать в модель
+ограничение -- по max_tokens
 
 
 
-о том, что использую в первом способе -- вот, из word_math_problems:
-можно сказать что вот видела интерпретатор, и как тут декларативный
-Few-shot prompting is a technique that uses LLMs to solve a task by providing the LLMs with
-a few demonstrations of the task as part of the input at inference time [1].
-
-
-
+### второй 
 
 python main.py --output_dir=.  --model_name_or_path=t5-base --operation=addition --orthography=10ebased --train_size=100 --val_size=10 --test_size=10 --min_digits_train=2  --max_digits_train=15 --min_digits_test=2 --max_digits_test=15 --base_number=10 --seed=1 --max_epochs=10 --check_val_every_n_epoch=2
  
- 
-все ограничено разрядной сеткой, так что давайте лучше разделять на части
-
-начнем с первого, что приходит в голову
-
-3 варианта 
-Питон без итерации
-Питон с итерацией
-Без питона
-
-
 
 в питоне есть еще majority at
 
-в оригинале использовался davinci code, у меня -- текст
 
 
-https://docs.python.org/3/whatsnew/3.0.html#integers
-The sys.maxint constant was removed, since there is no longer a limit to the value of integers. 
 
 
-## вопросы
+## как генерируются тестовые данные 
 
-как генерируются тестовые данные -- см INVESTIGATING_THE_LIMITATIONS_OF_TRANSFORM_apr21 2 метода.
+-- см INVESTIGATING_THE_LIMITATIONS_OF_TRANSFORM_apr21 2 метода.
 
