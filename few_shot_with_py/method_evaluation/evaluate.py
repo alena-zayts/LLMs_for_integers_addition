@@ -1,19 +1,20 @@
 import copy
 import json
-import argparse
 import tqdm
-import os
 import openai
-from interface import MyProgramInterface
-from prompts_formatting import generate_prompt
+from few_shot_with_py.baсkend import MyProgramInterface
+from few_shot_with_py.prompts_formatting import generate_prompt
+from few_shot_with_py.api_key import API_KEY
 
-openai.api_key = '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'
+openai.api_key = API_KEY
 
 SUM_PROMPT = generate_prompt()
 
 
+# models: 'text-davinci-003', 'gpt-3.5-turbo'
 class Settings:
-    def __init__(self, model_name, test_examples_path=f'test_examples.jsonl', results_path='eval_results/my_first_results.jsonl',
+    def __init__(self, model_name='gpt-3.5-turbo', test_examples_path=f'test_examples.jsonl',
+                 results_path='test_results.jsonl',
                  continue_experiment=False, temperature=0.0, top_p=1.0, max_tokens=128, majority_at=None):
         self.model_name = model_name
         self.test_examples_path = test_examples_path
@@ -36,15 +37,13 @@ class Settings:
         # The maximum number of tokens to generate in the chat completion.
         self.max_tokens = max_tokens
 
-        self.majority_at = majority_at  # todo??
+        # use voting or not
+        self.majority_at = majority_at
 
 
-# 'text-davinci-003', 'gpt-3.5-turbo'
-MODEL = 'gpt-3.5-turbo'
-settings = Settings(MODEL)
+settings = Settings()
 
-
-os.makedirs(os.path.dirname(settings.results_path), exist_ok=True)
+# os.makedirs(os.path.dirname(settings.results_path), exist_ok=True)
 test_examples = list(map(json.loads, open(settings.test_examples_path)))
 test_examples = test_examples[:2]
 
@@ -69,8 +68,8 @@ with open(settings.results_path, 'a' if settings.continue_experiment else 'w') a
             ans = interface.run(question, majority_at=settings.majority_at,
                                 temperature=settings.temperature,
                                 max_tokens=settings.max_tokens)
-            ans = float(ans)
-            score = 1 if abs(ans - test_example['target']) < 1e-3 else 0
+            ans = int(ans)
+            score = 1 if ans == test_example['target'] else 0
 
         except Exception as e:
             print(e)

@@ -2,9 +2,6 @@ from typing import *
 import copy
 import openai
 import time
-import io
-from contextlib import redirect_stdout
-
 
 class GenericRuntime:
     GLOBAL_DICT = {}

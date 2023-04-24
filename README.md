@@ -20,6 +20,22 @@
 описание метода и используемых данных, оценку качества, и краткий обзор 
 литературы по данной теме
 
+
+## Literature review: 
+
+### Links:
+
+[a link](https://github.com/user/repo/blob/branch/other_file.md)
+
+"...the **go to** statement should be abolished..." [[1]](#1).
+
+## References
+<a id="1">[1]</a> 
+Dijkstra, E. W. (1968). 
+Go to statement considered harmful. 
+Communications of the ACM, 11(3), 147-148.
+
+
 Word_math_problems_april_23 -- слишком большая для нашей задачи
 
 Word_math_problems_april_23 -> PAL: Program-aided Language Models (который вышел раньше)
@@ -191,7 +207,11 @@ python main.py --output_dir=.  --model_name_or_path=t5-base --operation=addition
 
 
 
+в питоне есть еще majority at
+
+в оригинале использовался davinci code, у меня -- текст
 
 
-
+https://docs.python.org/3/whatsnew/3.0.html#integers
+The sys.maxint constant was removed, since there is no longer a limit to the value of integers. 
 
