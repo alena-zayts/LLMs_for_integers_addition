@@ -13,7 +13,7 @@ SUM_PROMPT = generate_prompt()
 class Settings:
     def __init__(self, model_name='text-davinci-003', test_examples_path=f'test_examples.jsonl',
                  results_path='test_results.jsonl',
-                 continue_experiment=False, temperature=0.0, top_p=1.0, max_tokens=256, majority_at=None):
+                 continue_experiment=False, temperature=0.0, top_p=1.0, max_tokens=512, majority_at=None):
         self.model_name = model_name
         self.test_examples_path = test_examples_path
         self.results_path = results_path

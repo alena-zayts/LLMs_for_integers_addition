@@ -1,10 +1,15 @@
 # huawei_test_task
 
-## вопросы
 
-как генерируются тестовые данные -- см INVESTIGATING_THE_LIMITATIONS_OF_TRANSFORM_apr21 2 метода.
+# Problem description
 
-### Задача
+Adapt a large language model (not more than 4B parameters) to solve the problem of **addition of two long integers** (as long numbers as possible).
+The quality will be measured on a randomly generated set of numbers of different lengths.
+
+
+### Original task in Russian
+
+#### Задание
 На экзамене по AGI в институте, где учится Петя, разрешается пользоваться 
 калькулятором для вычислений, и большими языковыми моделями (не 
 более 4B параметров) для ответа на любые вопросы. У Пети сломался 
@@ -12,7 +17,7 @@
 экзамене у него не было проблем со сложением длинных чисел.
 
 
-### Комментарий
+#### Комментарий
 Необходимо обучить языковую модель решать примеры на сложение как 
 можно более длинных чисел. Качество будет измеряться на случайно 
 сгенерированном наборе чисел разной длины. 
@@ -21,7 +26,32 @@
 литературы по данной теме
 
 
-## Literature review: 
+# Literature review: 
+
+The first possible direction of solving the problem of addition of two long integers is to 'teach' language models the process of reasoning.
+
+
+Paper [[1]](#1) demonstrates that by fine-tuning an autoregressive language model (GPT-Neo) on appropriately structured step-by-step demonstrations *in a text form*, it is possible to teach it to execute 
+a mathematical task that has previously proved difficult for Transformers – longhand modulo 
+operations – with a relatively small number of examples. 
+
+Other two papers [[2]](#2) and [[3]](#3) go in approximately in the same direction but use few-shot prompting ([4]](#4), [5]](#5)), namely , some *algorithmic form* of prompts.
+
+
+
+
+
+Few-shot prompting leverages the strength of large-language
+models to solve a task with a set of k examples that are provided as part of the test-time input ([4]](#4), [5]](#5)), where k is usually a number in the low single digits. These input-output
+examples {(xi, yi)}, i=1;k are concatenated in a prompt p ≡ (x1 · y1) || (x2 · y2) || ... || (xk · yk). where “·” denotes
+the concatenation of an input and output, and “||” indicate
+the concatenation of different examples. During inference,
+a test instance xtest is appended to the prompt, and p k xtest
+is passed to the model which attempts to complete p k xtest,
+and thereby generate an answer ytest. Note that such fewshot prompting does not modify the underlying LLM.
+
+
+
 
 ### Links:
 
@@ -31,9 +61,38 @@
 
 ## References
 <a id="1">[1]</a> 
-Dijkstra, E. W. (1968). 
-Go to statement considered harmful. 
-Communications of the ACM, 11(3), 147-148.
+Gabriel Recchia. (2021). Teaching Autoregressive Language Models Complex Tasks By Demonstration. CoRR, abs/2109.02102. https://arxiv.org/abs/2109.02102
+
+<a id="2">[2]</a> 
+He-Yueya, J., Poesia, G., Wang, R. E., & Goodman, N. D. (2023). Solving Math Word Problems by Combining Language Models With Symbolic Solvers. https://arxiv.org/abs/2304.09102
+
+
+<a id="3">[3]</a> 
+Gao, L., Madaan, A., Zhou, S., Alon, U., Liu, P., Yang, Y., Callan, J., & Neubig, G. (2023). PAL: Program-aided Language Models.  https://arxiv.org/abs/2211.10435
+
+<a id="4">[4]</a> 
+T. Brown, B. Mann, N. Ryder, M. Subbiah, J. D. Kaplan, P. Dhariwal, A. Neelakantan, P. Shyam,
+G. Sastry, A. Askell, et al. Language models are few-shot learners. Advances in neural
+information processing systems, 33:1877–1901, 2020. https://arxiv.org/abs/2005.14165
+
+<a id="5">[5]</a> 
+Chowdhery, A., Narang, S., Devlin, J., Bosma, M., Mishra,
+G., Roberts, A., Barham, P., Chung, H. W., Sutton,
+C., Gehrmann, S., Schuh, P., Shi, K., Tsvyashchenko,
+S., Maynez, J., Rao, A., Barnes, P., Tay, Y., Shazeer,
+N., Prabhakaran, V., Reif, E., Du, N., Hutchinson, B.,
+Pope, R., Bradbury, J., Austin, J., Isard, M., Gur-Ari,
+G., Yin, P., Duke, T., Levskaya, A., Ghemawat, S., Dev,
+S., Michalewski, H., Garcia, X., Misra, V., Robinson,
+K., Fedus, L., Zhou, D., Ippolito, D., Luan, D., Lim,
+H., Zoph, B., Spiridonov, A., Sepassi, R., Dohan, D.,
+Agrawal, S., Omernick, M., Dai, A. M., Pillai, T. S.,
+Pellat, M., Lewkowycz, A., Moreira, E., Child, R., Polozov, O., Lee, K., Zhou, Z., Wang, X., Saeta, B., Diaz,
+M., Firat, O., Catasta, M., Wei, J., Meier-Hellstern, K.,
+Eck, D., Dean, J., Petrov, S., and Fiedel, N. PaLM: Scaling Language Modeling with Pathways. arXiv preprint
+arXiv:2204.02311, 2022.
+
+
 
 
 Word_math_problems_april_23 -- слишком большая для нашей задачи
@@ -214,4 +273,9 @@ python main.py --output_dir=.  --model_name_or_path=t5-base --operation=addition
 
 https://docs.python.org/3/whatsnew/3.0.html#integers
 The sys.maxint constant was removed, since there is no longer a limit to the value of integers. 
+
+
+## вопросы
+
+как генерируются тестовые данные -- см INVESTIGATING_THE_LIMITATIONS_OF_TRANSFORM_apr21 2 метода.
 
