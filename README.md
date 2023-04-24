@@ -29,6 +29,37 @@ The quality will be measured on a randomly generated set of numbers of different
 # Literature review: 
 
 
+## References
+<a id="1">[1]</a> 
+Gabriel Recchia. (2021). Teaching Autoregressive Language Models Complex Tasks By Demonstration. CoRR, abs/2109.02102. https://arxiv.org/abs/2109.02102
+
+<a id="2">[2]</a> 
+He-Yueya, J., Poesia, G., Wang, R. E., & Goodman, N. D. (2023). Solving Math Word Problems by Combining Language Models With Symbolic Solvers. https://arxiv.org/abs/2304.09102
+
+
+<a id="3">[3]</a> 
+Gao, L., Madaan, A., Zhou, S., Alon, U., Liu, P., Yang, Y., Callan, J., & Neubig, G. (2023). PAL: Program-aided Language Models.  https://arxiv.org/abs/2211.10435
+
+<a id="4">[4]</a> 
+T. Brown, B. Mann, N. Ryder, M. Subbiah, J. D. Kaplan, P. Dhariwal, A. Neelakantan, P. Shyam,
+G. Sastry, A. Askell, et al. Language models are few-shot learners. Advances in neural
+information processing systems, 33:1877–1901, 2020. https://arxiv.org/abs/2005.14165
+
+<a id="5">[5]</a> 
+Chowdhery, A., Narang, S., et al. PaLM: Scaling Language Modeling with Pathways. arXiv preprint
+arXiv:2204.02311, 2022.  https://arxiv.org/abs/2204.02311
+
+<a id="6">[6]</a> 
+Nogueira, R., Jiang, Z., & Lin, J. (2021). Investigating the Limitations of Transformers with Simple Arithmetic Tasks. https://arxiv.org/abs/2102.13019
+
+<a id="7">[7]</a> 
+Lewkowycz, A., Andreassen, A., et al. Solving quantitative reasoning problems with language models. arXiv preprint
+arXiv:2206.14858, 2022. https://arxiv.org/abs/2206.14858
+
+
+## Review
+
+
 
 The first possible direction of solving the problem of addition of two long integers as one of the mathematical problems is to 'teach' language models the process of reasoning.
 
@@ -52,87 +83,39 @@ reasoning steps, but offloads the solution step to a runtime (**Python interpret
 - Proposed in [[2]](#2) approach combines an LLM that can incrementally formalize word problems as a set of variables and 
 equations with an external **symbolic solver** that can solve them
 
-It has been shown in [[2]](#2) that their approach is more effective for more difficult problems that require declarative reasoning while the 
+
+** My first solution was mostly inspired by and based on paper [[3]](#3)**. Here are some reasons:
+
+1. It has been shown in [[2]](#2) that their approach is more effective for more difficult problems that require declarative reasoning while the 
 results on simple tasks like ours (addition of two long integers) [[2]](#2) and [[3]](#3) show comparable results.
 
 
-Moreover, since python 3 has no more limit to value of integers(https://docs.python.org/3/whatsnew/3.0.html#integers), 
-in this approach there disappear almost all limits for the length of numbers to sum.
+2. Since python 3 has no more limit to value of integers (https://docs.python.org/3/whatsnew/3.0.html#integers), almost all limits for the length of
+ numbers to sum.
  
-**That's why my first solution was mostly inspired by and based on paper [[3]](#3)**
-
-
 
 Here are some more interesting insights from [[3]](#3)
 
-**Large Numbers or Incorrect Reasoning**
-Они пытались понять ,почему ошибаются LLMs -- проблем с переводом или больщими числами
+1. Large Numbers or Incorrect Reasoning? 
 
-the primary failure mode is the inability to perform arithmetic accurately
+Autrhors show that the primary failure mode during working with large numbers is the inability to perform such arithmetic accurately, not the wrong generated solution steps
 
-ЭТО ОЧЕНЬ ВАЖНО!!!!!!!!!!!!!!
-ТО ЕСТЬ НАДО НЕ ОСТАВЛЯТЬ ВЫЧИСЛЕНИЯ МОДЕЛИ, А В ПИТОН
+So the main thing to focus on is performing arithmetic accurately which is esay to do using python.
 
+2. Is PAL better because of the Python prompt or because of the interpreter? 
 
-**Это именно засчет использования  интерпретатора или из-за того, что больше данных prompts (впрямую считай)**
-интерпретатор
-
-
-
+Authors experimented with generating Python code, while requiring the neural LM to “execute” it as well, without using an interpreter. 
+They created prompts that are similar to PAL’s, except that they do include the final answer.
+This resulted in a much lower accuracy results compared to original approach and other models.
+These results reinforced thair hypothesis that the main benefit of PAL comes from the synergy with the interpreter, and not only from having a better prompt.
 
 
-
-### Links:
-
-[a link](https://github.com/user/repo/blob/branch/other_file.md)
-
-"...the **go to** statement should be abolished..." [[1]](#1).
-
-## References
-<a id="1">[1]</a> 
-Gabriel Recchia. (2021). Teaching Autoregressive Language Models Complex Tasks By Demonstration. CoRR, abs/2109.02102. https://arxiv.org/abs/2109.02102
-
-<a id="2">[2]</a> 
-He-Yueya, J., Poesia, G., Wang, R. E., & Goodman, N. D. (2023). Solving Math Word Problems by Combining Language Models With Symbolic Solvers. https://arxiv.org/abs/2304.09102
+3. PAL can work with weaker models, while its benefit over chain-of-thought scales elegantly to stronger models as well.
 
 
-<a id="3">[3]</a> 
-Gao, L., Madaan, A., Zhou, S., Alon, U., Liu, P., Yang, Y., Callan, J., & Neubig, G. (2023). PAL: Program-aided Language Models.  https://arxiv.org/abs/2211.10435
-
-<a id="4">[4]</a> 
-T. Brown, B. Mann, N. Ryder, M. Subbiah, J. D. Kaplan, P. Dhariwal, A. Neelakantan, P. Shyam,
-G. Sastry, A. Askell, et al. Language models are few-shot learners. Advances in neural
-information processing systems, 33:1877–1901, 2020. https://arxiv.org/abs/2005.14165
-
-<a id="5">[5]</a> 
-Chowdhery, A., Narang, S., Devlin, J., Bosma, M., Mishra,
-G., Roberts, A., Barham, P., Chung, H. W., Sutton,
-C., Gehrmann, S., Schuh, P., Shi, K., Tsvyashchenko,
-S., Maynez, J., Rao, A., Barnes, P., Tay, Y., Shazeer,
-N., Prabhakaran, V., Reif, E., Du, N., Hutchinson, B.,
-Pope, R., Bradbury, J., Austin, J., Isard, M., Gur-Ari,
-G., Yin, P., Duke, T., Levskaya, A., Ghemawat, S., Dev,
-S., Michalewski, H., Garcia, X., Misra, V., Robinson,
-K., Fedus, L., Zhou, D., Ippolito, D., Luan, D., Lim,
-H., Zoph, B., Spiridonov, A., Sepassi, R., Dohan, D.,
-Agrawal, S., Omernick, M., Dai, A. M., Pillai, T. S.,
-Pellat, M., Lewkowycz, A., Moreira, E., Child, R., Polozov, O., Lee, K., Zhou, Z., Wang, X., Saeta, B., Diaz,
-M., Firat, O., Catasta, M., Wei, J., Meier-Hellstern, K.,
-Eck, D., Dean, J., Petrov, S., and Fiedel, N. PaLM: Scaling Language Modeling with Pathways. arXiv preprint
-arXiv:2204.02311, 2022.  https://arxiv.org/abs/2204.02311
-
-<a id="6">[6]</a> 
-Nogueira, R., Jiang, Z., & Lin, J. (2021). Investigating the Limitations of Transformers with Simple Arithmetic Tasks. https://arxiv.org/abs/2102.13019
-
-<a id="7">[7]</a> 
-Lewkowycz, A., Andreassen, A., Dohan, D., Dyer, E.,
-Michalewski, H., Ramasesh, V., Slone, A., Anil, C.,
-Schlag, I., Gutman-Solo, T., Wu, Y., Neyshabur, B.,
-Gur-Ari, G., and Misra, V. Solving quantitative reasoning problems with language models. arXiv preprint
-arXiv:2206.14858, 2022. https://arxiv.org/abs/2206.14858
 
 
-# Solution 1. few-shot with python interpreter
+# Solution 1. few-shot with python interpreter (based on [[3]](#3))
 
 Few-shot prompting leverages the strength of large-language
 models to solve a task with a set of k examples that are provided as part of the test-time input ([4]](#4), [5]](#5)), where k is usually a number in the low single digits. These input-output
@@ -145,7 +128,17 @@ and thereby generate an answer ytest. Note that such fewshot prompting does not 
 
 ограничение -- по max_tokens
 
-### каую модель за базу
+text-davinci-003
+MAX TOKENS
+4,097 tokens
+
+https://platform.openai.com/docs/models/gpt-4
+
+
+
+## Base model
+In the original paper authors mostly used CODEX (code-davinci-002) as a backend LLM. However Codex models are now deprecated (https://platform.openai.com/docs/models/codex).
+
 they used
 The Codex models are now deprecated.
 
@@ -159,7 +152,7 @@ https://platform.openai.com/docs/model-index-for-researchers
 
 
 
-
+Хотя авторы говорили, что так делать не надо
 
 
 
