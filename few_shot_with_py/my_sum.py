@@ -7,7 +7,7 @@ import argparse
 openai.api_key = API_KEY
 
 SUM_PROMPT = generate_prompt()
-
+print(SUM_PROMPT)
 
 # models: 'text-davinci-003', 'gpt-3.5-turbo'
 class Settings:
@@ -44,7 +44,7 @@ settings = Settings()
 interface = MyProgramInterface(stop='\n\n\n', get_answer_expr='solution()', model=settings.model_name, verbose=True)
 
 
-def summ(a: int, b: int) -> int:
+def my_sum(a: int, b: int) -> int:
     question = SUM_PROMPT.format(a=a, b=b)
 
     try:
@@ -77,7 +77,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     try:
-        res = summ(int(args.a), int(args.b))
+        res = my_sum(int(args.a), int(args.b))
         print(f'{args.a} + {args.b} = {res}')
 
     except Exception as e:

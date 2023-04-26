@@ -5,6 +5,7 @@ import openai
 from few_shot_with_py.baсkend import MyProgramInterface
 from few_shot_with_py.prompts_formatting import generate_prompt
 from few_shot_with_py.api_key import API_KEY
+from ..my_sum import my_sum
 
 openai.api_key = API_KEY
 
@@ -80,7 +81,7 @@ with open(settings.results_path, 'a' if settings.continue_experiment else 'w') a
         result = copy.copy(test_example)
         result['answer'] = ans
         result['score'] = score
-        result['generation'] = interface.history
+        result['generated_code'] = interface.history
         f.write(json.dumps(result) + '\n')
 
         interface.clear_history()

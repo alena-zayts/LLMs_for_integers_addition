@@ -31,14 +31,14 @@ The quality will be measured on a randomly generated set of numbers of different
 
 ## References
 <a id="1">[1]</a> 
-Gabriel Recchia. (2021). Teaching Autoregressive Language Models Complex Tasks By Demonstration. CoRR, abs/2109.02102. https://arxiv.org/abs/2109.02102
+Gabriel Recchia. Teaching Autoregressive Language Models Complex Tasks By Demonstration. CoRR, abs/2109.02102, 2021. https://arxiv.org/abs/2109.02102
 
 <a id="2">[2]</a> 
-He-Yueya, J., Poesia, G., Wang, R. E., & Goodman, N. D. (2023). Solving Math Word Problems by Combining Language Models With Symbolic Solvers. https://arxiv.org/abs/2304.09102
+He-Yueya, J., Poesia, G., Wang, R. E., & Goodman, N. D. Solving Math Word Problems by Combining Language Models With Symbolic Solvers, 2023. https://arxiv.org/abs/2304.09102
 
 
 <a id="3">[3]</a> 
-Gao, L., Madaan, A., Zhou, S., Alon, U., Liu, P., Yang, Y., Callan, J., & Neubig, G. (2023). PAL: Program-aided Language Models.  https://arxiv.org/abs/2211.10435
+Gao, L., Madaan, A., Zhou, S., Alon, U., Liu, P., Yang, Y., Callan, J., & Neubig, G. PAL: Program-aided Language Models, 2023.  https://arxiv.org/abs/2211.10435
 
 <a id="4">[4]</a> 
 T. Brown, B. Mann, N. Ryder, M. Subbiah, J. D. Kaplan, P. Dhariwal, A. Neelakantan, P. Shyam,
@@ -50,7 +50,7 @@ Chowdhery, A., Narang, S., et al. PaLM: Scaling Language Modeling with Pathways.
 arXiv:2204.02311, 2022.  https://arxiv.org/abs/2204.02311
 
 <a id="6">[6]</a> 
-Nogueira, R., Jiang, Z., & Lin, J. (2021). Investigating the Limitations of Transformers with Simple Arithmetic Tasks. https://arxiv.org/abs/2102.13019
+Nogueira, R., Jiang, Z., & Lin, J. Investigating the Limitations of Transformers with Simple Arithmetic Tasks, 2021. https://arxiv.org/abs/2102.13019
 
 <a id="7">[7]</a> 
 Lewkowycz, A., Andreassen, A., et al. Solving quantitative reasoning problems with language models. arXiv preprint
@@ -117,6 +117,9 @@ These results reinforced thair hypothesis that the main benefit of PAL comes fro
 
 # Solution 1. few-shot with python interpreter (based on [[3]](#3))
 
+Осталось найти модель с небольшим числом параемтров и описать.
+
+
 Few-shot prompting leverages the strength of large-language
 models to solve a task with a set of k examples that are provided as part of the test-time input ([4]](#4), [5]](#5)), where k is usually a number in the low single digits. These input-output
 examples {(xi, yi)}, i=1;k are concatenated in a prompt p ≡ (x1 · y1) || (x2 · y2) || ... || (xk · yk). where “·” denotes
@@ -135,12 +138,14 @@ MAX TOKENS
 https://platform.openai.com/docs/models/gpt-4
 
 
+python main.py --a=10000000001 --b=9
+
 
 ## Base model
 In the original paper authors mostly used CODEX (code-davinci-002) as a backend LLM. However Codex models are now deprecated (https://platform.openai.com/docs/models/codex).
+They were descendants of our GPT-3 models that would understand and generate code. 
 
-they used
-The Codex models are now deprecated.
+
 
 моделей тех нет, взяла лучшее 
 https://platform.openai.com/docs/model-index-for-researchers
@@ -150,11 +155,27 @@ https://platform.openai.com/docs/model-index-for-researchers
 в оригинале использовался davinci code, у меня -- текст
 
 
-
-
 Хотя авторы говорили, что так делать не надо
 
+Does PAL work with LMs of natural language? We
+also experimented with PAL using the text-davinci
+series. Figure 8 shows the following interesting results: when the base LM’s “code modeling ability” is
+weak (using text-davinci-001), COT performs better
+than PAL. However, once the LM’s code modeling ability is sufficiently high (using text-davinci-002 and
+text-davinci-003), PAL outperforms COT, and PAL
+text-davinci-003 performs almost as PAL code-davinci-002.
+This shows that PAL is not limited to LMs of code, but it
+can work with LMs that were mainly trained for natural
+language, if they have a sufficiently high coding ability.
 
+### альтернативы
+
+
+ https://arxiv.org/pdf/1910.00577v1.pdf -- 15m, C#, java
+ 
+ 
+ gpt 2
+ 
 
 ## INVESTIGATING_THE_LIMITATIONS_OF_TRANSFORM_apr21
 https://github.com/castorini/transformers-arithmetic

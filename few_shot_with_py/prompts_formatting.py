@@ -1,18 +1,29 @@
 def code_for_one_task(a, b):
+    # return f'''
+    # def solution():
+    #     """What is {a} plus {b}?"""
+    #     a = {a}
+    #     b = {b}
+    #     plus = a + b
+    #     result = plus
+    #     return result
+    #
+    #
+    #
+    #
+    #
+    #
+    # '''
     return f'''
     def solution():
         """What is {a} plus {b}?"""
-        a = {a}
-        b = {b}
-        plus = a + b
-        result = plus
-        return result
-        
-        
-        
-        
-        
-        
+        return {a} + {b}
+
+
+
+
+
+
     '''
 
 def header_for_one_task(a, b):
@@ -27,10 +38,10 @@ def full_question_with_code_for_one_task(a, b):
 
 examples = [
     [121231, 349340],
-    [-12, 31323],
-    [93, -2901201],
-    [-123, -132],
-    [239239876568, 876578290323],
+    # [-12, 31323],
+    # [93, -2901201],
+    # [-123, -132],
+    # [239239876568, 876578290323],
 ]
 
 
