@@ -16,7 +16,6 @@ EXAMPLES_AMOUNT = len(examples_numbers)
 def code_for_one_task(a, b):
     return f'''
     def {FUNCTION_CALL}:
-        """What is {a} plus {b}?"""
         return {a} + {b}
 
     '''

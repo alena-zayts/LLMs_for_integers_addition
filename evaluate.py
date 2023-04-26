@@ -1,7 +1,7 @@
 import copy
 import json
 import tqdm
-from abstract_solver import AbstractSolver
+from solutions_evaluation.abstract_solver import AbstractSolver
 from solution_1.solver import Solver1
 from time import time
 
@@ -51,7 +51,7 @@ def evaluate(test_filename: str, output_filename: str, solverClass, continue_exp
 
             f.flush()
 
-        print(result)
-        print(f'Current accuracy - {sum(scores) / len(scores)}')
+            print(result)
+            print(f'Current accuracy - {sum(scores) / len(scores)}')
 
-evaluate('test_examples.jsonl', 'solution1_results.jsonl', Solver1)
+evaluate('solutions_evaluation/test_examples.jsonl', 'solution1_results.jsonl', Solver1)

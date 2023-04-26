@@ -1,7 +1,7 @@
 from transformers import AutoTokenizer, AutoModelForCausalLM
-from prompt_generation import CODE_START_MARKER, EXAMPLES_AMOUNT, QUESTION_START_MARKER, \
+from solution_1.prompt_generation import CODE_START_MARKER, EXAMPLES_AMOUNT, QUESTION_START_MARKER, \
     generate_prompt, count_code_answer_length, FUNCTION_CALL
-from runtime import GenericRuntime
+from solution_1.runtime import GenericRuntime
 from typing import List
 from solutions_evaluation.abstract_solver import AbstractSolver
 
