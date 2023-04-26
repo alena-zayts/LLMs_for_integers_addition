@@ -5,7 +5,7 @@ from math import floor, sqrt
 random.seed(0)
 
 
-def sample_with_step(filename='test_examples.jsonl', n_each=1, min_d=10, max_d=101, step_d=10):
+def sample_with_step(filename='test_examples_3.jsonl', n_each=3, min_d=10, max_d=101, step_d=10):
     with open(filename, 'w'):
         pass
 

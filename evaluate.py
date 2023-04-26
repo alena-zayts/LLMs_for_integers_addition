@@ -7,7 +7,11 @@ from time import time
 
 # test_filename = 'test_examples.jsonl'
 
-def evaluate(test_filename: str, output_filename: str, solverClass, continue_experiment: bool = False):
+def evaluate(test_filename: str, output_filename_postfix: str, solverClass, continue_experiment: bool = False):
+    output_filename = test_filename[:test_filename.find('.')] + \
+                      output_filename_postfix + \
+                      test_filename[test_filename.find('.') + 1:]
+
     start_init = time()
     solver: AbstractSolver = solverClass()
     end_init = time()
@@ -54,4 +58,4 @@ def evaluate(test_filename: str, output_filename: str, solverClass, continue_exp
             print(result)
             print(f'Current accuracy - {sum(scores) / len(scores)}')
 
-evaluate('solutions_evaluation/test_examples.jsonl', 'solution1_results.jsonl', Solver1)
+evaluate('solutions_evaluation/test_examples_3.jsonl', 'solution1_results', Solver1)
