@@ -5,43 +5,6 @@ from math import floor, sqrt
 random.seed(0)
 
 
-def go(filename='test_examples.jsonl', n_reapeats=50):
-    min_e = 1e20
-    max_e = 1e30
-    with open(filename, 'w') as f:
-        for i in range(n_reapeats):
-            a = random.randint(int(min_e), int(max_e))
-            b = random.randint(int(min_e), int(max_e))
-            example = {
-                'a': a,
-                'b': b,
-                'target': a + b
-            }
-
-            f.write(json.dumps(example) + '\n')
-            f.flush()
-
-
-
-
-# Random sampling: sample [number1] and [number2] independently from [0, 10^D −1]
-def random_sampling(n_numbers: int = 100, max_d: int = 100, filename='test_examples.jsonl', ):
-    max_number = pow(10, max_d) - 1
-
-    with open(filename, 'w') as f:
-        for i in range(n_numbers):
-            a = random.randint(0, max_number)
-            b = random.randint(0, max_number)
-            example = {
-                'a': a,
-                'b': b,
-                'target': a + b
-            }
-
-            f.write(json.dumps(example) + '\n')
-            f.flush()
-
-
 def sample_with_step(filename='test_examples.jsonl', n_each=1, min_d=10, max_d=101, step_d=10):
     with open(filename, 'w'):
         pass
@@ -95,7 +58,5 @@ def sample_with_step(filename='test_examples.jsonl', n_each=1, min_d=10, max_d=1
             print(example_equal)
             print(example_not_equal)
 
-
-# go()
-#random_sampling()
-sample_with_step()
+if __name__ == '__main__':
+    sample_with_step()

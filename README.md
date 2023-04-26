@@ -177,6 +177,9 @@ language, if they have a sufficiently high coding ability.
  gpt 2
  
 
+## возможные проблемы -- когда число циклическое, то модель скорее повторять начинает. так было когда комментарий писала как в оригинальной статье
+ 
+
 ## INVESTIGATING_THE_LIMITATIONS_OF_TRANSFORM_apr21
 https://github.com/castorini/transformers-arithmetic
 

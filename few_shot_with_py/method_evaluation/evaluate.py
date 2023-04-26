@@ -5,7 +5,6 @@ import openai
 from few_shot_with_py.baсkend import MyProgramInterface
 from few_shot_with_py.prompts_formatting import generate_prompt
 from few_shot_with_py.api_key import API_KEY
-from ..my_sum import my_sum
 
 openai.api_key = API_KEY
 
@@ -46,7 +45,7 @@ settings = Settings()
 
 # os.makedirs(os.path.dirname(settings.results_path), exist_ok=True)
 test_examples = list(map(json.loads, open(settings.test_examples_path)))
-test_examples = test_examples[:2]
+# test_examples = test_examples[:2]
 
 interface = MyProgramInterface(stop='\n\n\n', get_answer_expr='solution()', model=settings.model_name, verbose=True)
 
@@ -66,20 +65,20 @@ with open(settings.results_path, 'a' if settings.continue_experiment else 'w') a
         question = SUM_PROMPT.format(a=a, b=b)
 
         try:
-            ans = interface.run(question, majority_at=settings.majority_at,
-                                temperature=settings.temperature,
-                                max_tokens=settings.max_tokens)
-            ans = int(ans)
-            score = 1 if ans == test_example['target'] else 0
+            answer = interface.run(question, majority_at=settings.majority_at,
+                                   temperature=settings.temperature,
+                                   max_tokens=settings.max_tokens)
+            answer = int(answer)
+            score = 1 if answer == test_example['target'] else 0
 
         except Exception as e:
             print(e)
-            ans = ''
+            answer = ''
             score = 0
         scores.append(score)
 
         result = copy.copy(test_example)
-        result['answer'] = ans
+        result['answer'] = answer
         result['score'] = score
         result['generated_code'] = interface.history
         f.write(json.dumps(result) + '\n')
