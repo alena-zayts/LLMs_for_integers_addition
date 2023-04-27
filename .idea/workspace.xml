@@ -4,7 +4,6 @@
     <list default="true" id="066748ca-f53d-4732-847e-2ab325f72cba" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/evaluate.py" beforeDir="false" afterPath="$PROJECT_DIR$/evaluate.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -308,7 +307,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682572954867</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="editing readme">
+      <created>1682609722482</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1682609722482</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -333,7 +339,8 @@
     <MESSAGE value="solution1 first results" />
     <MESSAGE value="solution1 full results1" />
     <MESSAGE value="solution1 evaluated finally" />
-    <option name="LAST_COMMIT_MESSAGE" value="solution1 evaluated finally" />
+    <MESSAGE value="editing readme" />
+    <option name="LAST_COMMIT_MESSAGE" value="editing readme" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

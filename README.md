@@ -10,12 +10,9 @@ The quality will be measured on a randomly generated set of numbers of different
 
 # Solutions
 
+## 1. First approach - teach a model with demonstrations
 
-
-
-### 1. First approach - teach a model with demonstrations
-
-#### Literature review
+### Literature review
 The first possible direction of solving the problem of addition of two long integers as one of the mathematical problems is to 'teach' language models the process of reasoning.
 Recently, LLMs have shown impressive success on a wide range of tasks by using this approach.
 
@@ -37,9 +34,9 @@ reasoning steps, but offloads the solution step to a runtime (**Python interpret
 equations with an external **symbolic solver** that can solve them
 
 
-#### Solution description
+### Solution description: few-shot promting & using a python interpreter
 
-##### Motivation
+#### Motivation
 My first solution was mostly inspired by and based on paper [[3]](#3). Here are some reasons:
 
 1. It has been shown in [[2]](#2) that their approach is more effective for more difficult problems that require declarative reasoning while the 
@@ -59,19 +56,27 @@ results on simple tasks like ours (addition of two long integers) [[2]](#2) and 
 
 
 
-##### Description
+#### Description
 
-Осталось найти модель с небольшим числом параемтров и описать.
-
-
-Few-shot prompting leverages the strength of large-language
-models to solve a task with a set of k examples that are provided as part of the test-time input ([4]](#4), [5]](#5)), where k is usually a number in the low single digits. These input-output
-examples {(xi, yi)}, i=1;k are concatenated in a prompt p ≡ (x1 · y1) || (x2 · y2) || ... || (xk · yk). where “·” denotes
+Few-shot prompting does not require task-specific fine-tuning of the base model, so it does not modify the underlying LLM
+It leverages the strength of large-language
+models to solve a task with a set of k examples that are provided as part of the test-time input, where k is usually a number in the low single digits ([[4]](#4)). 
+These input-output  examples {(xi, yi)}, i=1;k are concatenated in a prompt p ≡ (x1 · y1) || (x2 · y2) || ... || (xk · yk). where “·” denotes
 the concatenation of an input and output, and “||” indicate
 the concatenation of different examples. During inference,
-a test instance xtest is appended to the prompt, and p k xtest
-is passed to the model which attempts to complete p k xtest,
-and thereby generate an answer ytest. Note that such fewshot prompting does not modify the underlying LLM.
+a test instance xtest is appended to the prompt, and p || xtest
+is passed to the model which attempts to complete p || xtest,
+and thereby generate an answer ytest. Note that such fewshot prompting .
+
+#### Base model
+In the original paper authors mostly used CODEX (specifically, code-davinci-002) as a backend LLM. However Codex models are now [deprecated](https://platform.openai.com/docs/models/codex). Moreover, all of them do not satisfy the limitation on the number of base LLM parameters (4B).
+They were descendants of our GPT-3 models that would understand and generate code. 
+
+In original paper [[3]](#3) authors show that this approach performs better when the base model either has high 'code modeling ability' or
+it is a 'sufficiently strong' natural language model (which requires billions of parameters). 
+
+That's why it was decided to use remained to choose a with high “code modeling ability” and less than 4B params.
+
 
 ограничение -- по max_tokens
 
@@ -85,32 +90,7 @@ https://platform.openai.com/docs/models/gpt-4
 python main.py --a=10000000001 --b=9
 
 
-## Base model
-In the original paper authors mostly used CODEX (code-davinci-002) as a backend LLM. However Codex models are now deprecated (https://platform.openai.com/docs/models/codex).
-They were descendants of our GPT-3 models that would understand and generate code. 
 
-
-
-моделей тех нет, взяла лучшее 
-https://platform.openai.com/docs/model-index-for-researchers
-
-еще работает gpt-3.5-turbo
-
-в оригинале использовался davinci code, у меня -- текст
-
-
-Хотя авторы говорили, что так делать не надо
-
-Does PAL work with LMs of natural language? We
-also experimented with PAL using the text-davinci
-series. Figure 8 shows the following interesting results: when the base LM’s “code modeling ability” is
-weak (using text-davinci-001), COT performs better
-than PAL. However, once the LM’s code modeling ability is sufficiently high (using text-davinci-002 and
-text-davinci-003), PAL outperforms COT, and PAL
-text-davinci-003 performs almost as PAL code-davinci-002.
-This shows that PAL is not limited to LMs of code, but it
-can work with LMs that were mainly trained for natural
-language, if they have a sufficiently high coding ability.
 
 ### альтернативы
 
