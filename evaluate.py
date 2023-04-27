@@ -51,6 +51,7 @@ def evaluate(test_filename: str, output_filename_postfix: str, solverClass, cont
             result['answer_int'] = answer_int
             result['score'] = score
             result['prediction_time'] = end_predict - start_predict
+            result['meta_info'] = meta_info
             f.write(json.dumps(result) + '\n')
 
             f.flush()
