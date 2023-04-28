@@ -56,7 +56,7 @@ results on simple tasks like ours (addition of two long integers) [[2]](#2) and 
 
 
 
-#### Description
+#### Few-shot idea
 
 Few-shot prompting does not require task-specific fine-tuning of the base model, so it does not modify the underlying LLM
 It leverages the strength of large-language
@@ -66,7 +66,45 @@ the concatenation of an input and output, and “||” indicate
 the concatenation of different examples. During inference,
 a test instance xtest is appended to the prompt, and p || xtest
 is passed to the model which attempts to complete p || xtest,
-and thereby generate an answer ytest. Note that such fewshot prompting .
+and thereby generate an answer ytest. Note that such few-shot prompting .
+
+#### Prompting
+My prompt consists of 4 examples of the task of addition of two numbers (both positive, first negative and second positive, first positive and second negative, both negative) with their code solutions and the *target* task question.
+For example, if we need to add 2 and 3 then the prompt would be:
+
+```
+Q: What is 121231 plus 349340?
+    
+# solution in Python:
+def solution():
+    return 121231 + 349340
+    
+    
+Q: What is -12 plus 31323?
+
+# solution in Python:
+def solution():
+    return -12 + 31323
+    
+    
+Q: What is 93 plus -2901201?
+
+# solution in Python:
+def solution():
+    return 93 + -2901201
+
+
+Q: What is -123 plus -132?
+# solution in Python:
+def solution():
+    return -123 + -132
+
+
+Q: What is 2 plus 3?
+# solution in Python:
+```
+
+(using fewer examples it is possible to reduce the response time of the model. However solution evaluation shows tha at least theese 4 examples (with all combinations of positive and negative summands) should be shown. Otherwise, the model fails mostly on the tasks that have a combination that it has not seen)
 
 #### Base model
 In the original paper authors mostly used CODEX (specifically, code-davinci-002) as a backend LLM. However Codex models are now [deprecated](https://platform.openai.com/docs/models/codex). Moreover, all of them do not satisfy the limitation on the number of base LLM parameters (4B).
@@ -75,36 +113,56 @@ They were descendants of our GPT-3 models that would understand and generate cod
 In original paper [[3]](#3) authors show that this approach performs better when the base model either has high 'code modeling ability' or
 it is a 'sufficiently strong' natural language model (which requires billions of parameters). 
 
-That's why it was decided to use remained to choose a with high “code modeling ability” and less than 4B params.
+That's why it was decided to use a model with high “code modeling ability” and way less than 4B params:
+[Salesforce/codegen-350M-mono](https://huggingface.co/Salesforce/codegen-350M-mono)
 
 
-ограничение -- по max_tokens
+#### Solution steps
+Given to numbers for addition:
 
-text-davinci-003
-MAX TOKENS
-4,097 tokens
+1. Create the described prompt
+2. Send the prompt to the model and get its response
+3. Select a section of the response where the generated code for the solution of the target task is
+4. Execute the code with (my own) runtime
+5. Return the result of the execution as answer
 
-https://platform.openai.com/docs/models/gpt-4
+#### Usage
+
+a) Run from /solution1_few_shot_with_python in the command line command
+``` 
+python main.py --a=2 --b=3
+```
+where `a` and `b` are the two integers to sum
+
+b) Use Solver1 class from /solution1_few_shot_with_python/solver:
+```
+solver = Solver1()
+a = 2
+b = 3
+answer_int, meta_info = solver.calc_sum(a, b)
+```
+Its main method calc_sum takes as arguments two integers to sum and returns the integer result of suumation and a dict with meta_info (i.e. the created promt, full model response, chosen code)
 
 
-python main.py --a=10000000001 --b=9
 
-
-
-
-### альтернативы
-
-
- https://arxiv.org/pdf/1910.00577v1.pdf -- 15m, C#, java
+#### Interesting problems found
+Given a number that is a kind of cyclical (i.e. 123456789012345678901234567890) the solution may fail as the model often decides to continue the detected cycle instead of generating the code
  
- 
- gpt 2
- 
+#### Evaluation
+The data for the evaluation was generated with script solutions_evaluation/generate_numbers_to_sum.
+With the maximum number of digits in the number `cur_d` from 10 to 100 (with step 10): for each `cur_d` the following examples were randomly generated
+* when both numbers have exactly `cur_d` digits 
+* when one number have exactly `cur_d` digits and the other one -- from 1 to `cur_d` digits
 
-## возможные проблемы -- когда число циклическое, то модель скорее повторять начинает. так было когда комментарий писала как в оригинальной статье
+In each described pattern each number was randomly made positive or negative and 3 examples of each pattern were created. This results in 60 examples in the file solutions_evaluation/test_examples_3.jsonl
 
-## с меньшим числом примеров быстрее конечно но тогда ошибок больше. я делаю упор на качество. (c 1 ++ - 0.8 и ошибки независимо от длины на минусах)
- 
+
+The chosen metric is accuracy (with the requirement that the result of the solution must *exactly* match the expected)
+
+The results of the evaluation (with the solution answers, the expected result, time spent, generated code for each test example) can be found in in the file solutions_evaluation/test_examples_3solution1_results.jsonl
+
+The solution accuracy is 
+
 
 ## INVESTIGATING_THE_LIMITATIONS_OF_TRANSFORM_apr21
 https://github.com/castorini/transformers-arithmetic

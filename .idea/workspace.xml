@@ -4,6 +4,15 @@
     <list default="true" id="066748ca-f53d-4732-847e-2ab325f72cba" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/evaluate.py" beforeDir="false" afterPath="$PROJECT_DIR$/evaluate.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/solution_1/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/solution1_few_shot_with_python/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/solution_1/prompt_generation.py" beforeDir="false" afterPath="$PROJECT_DIR$/solution1_few_shot_with_python/prompt_generation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/solution_1/runtime.py" beforeDir="false" afterPath="$PROJECT_DIR$/solution1_few_shot_with_python/runtime.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/solution_1/solver.py" beforeDir="false" afterPath="$PROJECT_DIR$/solution1_few_shot_with_python/solver.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/solutions_evaluation/solution1_results.jsonl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/solutions_evaluation/test_examples.jsonl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/solutions_evaluation/test_examples_2.jsonl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/solutions_evaluation/test_results.jsonl" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +65,7 @@
       <recent name="C:\Users\alena\Desktop\8_sem\huawei_test_task\few_shot_with_py\eval_results" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.evaluate (1)">
+  <component name="RunManager" selected="Python.solver">
     <configuration name="evaluate (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="huawei_test_task" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -185,10 +194,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.solver" />
         <item itemvalue="Python.evaluate (1)" />
         <item itemvalue="Python.generate_numbers_to_sum" />
         <item itemvalue="Python.evaluate (1)" />
-        <item itemvalue="Python.solver" />
         <item itemvalue="Python.generate_numbers_to_sum (1)" />
       </list>
     </recent_temporary>
@@ -314,7 +323,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682609722482</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="editing readme">
+      <created>1682612289779</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1682612289779</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -356,7 +372,7 @@
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/solution_1/solver.py</url>
+          <url>file://$PROJECT_DIR$/solution1_few_shot_with_python/solver.py</url>
           <line>38</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>

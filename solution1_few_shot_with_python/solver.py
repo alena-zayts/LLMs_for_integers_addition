@@ -1,7 +1,7 @@
 from transformers import AutoTokenizer, AutoModelForCausalLM
-from solution_1.prompt_generation import CODE_START_MARKER, EXAMPLES_AMOUNT, QUESTION_START_MARKER, \
+from solution1_few_shot_with_python.prompt_generation import CODE_START_MARKER, EXAMPLES_AMOUNT, QUESTION_START_MARKER, \
     generate_prompt, count_code_answer_length, FUNCTION_CALL
-from solution_1.runtime import GenericRuntime
+from solution1_few_shot_with_python.runtime import GenericRuntime
 from typing import List
 from solutions_evaluation.abstract_solver import AbstractSolver
 
@@ -51,8 +51,8 @@ class Solver1(AbstractSolver):
 
 if __name__ == '__main__':
     solver = Solver1()
-    a = 10097612345678909876542234567890987654321234567890987654321234567890987654323456789
-    b = 123456789876543234567898765434567890987654345678998765434567890987654345678987654345678765434567
+    a = 2
+    b = 3
     expected = a + b
     answer_int, meta_info = solver.calc_sum(a, b)
 
