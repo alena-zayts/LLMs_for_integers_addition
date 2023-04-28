@@ -3,7 +3,7 @@
 
 # Problem description
 
-Adapt a large language model (not more than 4B parameters) to solve the problem of addition of two long integers (as any digits as possible).
+Adapt a large language model (not more than 4B parameters) to solve the problem of addition of two long integers (as many digits as possible).
 The quality will be measured on a randomly generated set of numbers of different lengths.
 
 
@@ -116,6 +116,17 @@ it is a 'sufficiently strong' natural language model (which requires billions of
 That's why it was decided to use a model with high “code modeling ability” and way less than 4B params:
 [Salesforce/codegen-350M-mono](https://huggingface.co/Salesforce/codegen-350M-mono)
 
+Information about the model:
+```
+CodeGen is a family of autoregressive language models for program synthesis 
+from the paper: A Conversational Paradigm for Program Synthesis by Erik Nijkamp,
+Bo Pang, Hiroaki Hayashi, Lifu Tu, Huan Wang, Yingbo Zhou, Silvio Savarese, Caiming Xiong. 
+
+The checkpoint included in this repository is denoted as CodeGen-Mono 350M 
+in the paper, where "Mono" means the model is initialized with CodeGen-Multi 350M 
+and further pre-trained on a Python programming language dataset, 
+and "350M" refers to the number of trainable parameters.
+```
 
 #### Solution steps
 Given to numbers for addition:
@@ -138,7 +149,8 @@ a) Run from /solution1_few_shot_with_python in the command line command
 ``` 
 python main.py --a=2 --b=3
 ```
-where `a` and `b` are the two integers to sum
+where `a` and `b` are the two integers to sum.
+The result would be a string: `a + b = x` where a, b - given numbers and x is the produced result.
 
 b) Use Solver1 class from /solution1_few_shot_with_python/solver:
 ```
@@ -321,7 +333,9 @@ decides to shorten the sequence in the middle of the generation, i.e., by skippi
 extrapolation ranges (e.g., training on 20 digits, evaluating on 30 digits, etc.). Investigating it further
 might help us understand why neural models often fail on extrapolation tasks.
 
+**описать остальные параметры**
 
+** IMPACT OF DATA SIZE**
 ## INVESTIGATING_THE_LIMITATIONS_OF_TRANSFORM_apr21
 
 
