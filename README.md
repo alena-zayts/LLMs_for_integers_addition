@@ -120,11 +120,17 @@ That's why it was decided to use a model with high “code modeling ability” a
 #### Solution steps
 Given to numbers for addition:
 
-1. Create the described prompt
-2. Send the prompt to the model and get its response
+1. Create the described prompt 
+   (see `solution1_few_shot_with_python/prompt_generation.py`)
+2. Send the prompt to the model and get its response 
+   (see Solver.calc_sum in `solution1_few_shot_with_python/solver.py`)
 3. Select a section of the response where the generated code for the solution of the target task is
+   (see Solver.calc_sum in `solution1_few_shot_with_python/solver.py`)
 4. Execute the code with (my own) runtime
+   (see Solver.execute in `solution1_few_shot_with_python/solver.py` and `solution1_few_shot_with_python/runtime.py`)
 5. Return the result of the execution as answer
+   (see Solver.calc_sum in `solution1_few_shot_with_python/solver.py`)
+
 
 #### Usage
 
@@ -141,7 +147,7 @@ a = 2
 b = 3
 answer_int, meta_info = solver.calc_sum(a, b)
 ```
-Its main method calc_sum takes as arguments two integers to sum and returns the integer result of suumation and a dict with meta_info (i.e. the created promt, full model response, chosen code)
+Its main method calc_sum takes as arguments two integers to sum and returns the integer result of summation and a dict with meta_info (i.e. the created promt, full model response, chosen code)
 
 
 
@@ -149,17 +155,18 @@ Its main method calc_sum takes as arguments two integers to sum and returns the 
 Given a number that is a kind of cyclical (i.e. 123456789012345678901234567890) the solution may fail as the model often decides to continue the detected cycle instead of generating the code
  
 #### Evaluation
-The data for the evaluation was generated with script solutions_evaluation/generate_numbers_to_sum.
-With the maximum number of digits in the number `cur_d` from 10 to 100 (with step 10): for each `cur_d` the following examples were randomly generated
+The data for the evaluation was generated with script `solutions_evaluation/generate_numbers_to_sum.py`
+With the maximum amount of digits in the number `cur_d` from 10 to 100 (with step 10): for each `cur_d` the following examples were randomly generated
 * when both numbers have exactly `cur_d` digits 
-* when one number have exactly `cur_d` digits and the other one -- from 1 to `cur_d` digits
+* when one number has exactly `cur_d` digits and the other one -- from 1 to `cur_d` digits
 
-In each described pattern each number was randomly made positive or negative and 3 examples of each pattern were created. This results in 60 examples in the file solutions_evaluation/test_examples_3.jsonl
+In each described pattern each number was randomly made positive or negative and 5 examples of each pattern were created. This results in 100 examples in the file `solutions_evaluation/test_examples.jsonl`
 
+The evaluation was produced by script `solutions_evaluation/evaluate.py`.
 
 The chosen metric is accuracy (with the requirement that the result of the solution must *exactly* match the expected)
 
-The results of the evaluation (with the solution answers, the expected result, time spent, generated code for each test example) can be found in in the file solutions_evaluation/test_examples_3solution1_results.jsonl
+The results of the evaluation (with the solution answers, the expected result, time spent, generated code for each test example) can be found in in the file `solutions_evaluation/test_examples_solution1_results.jsonl`
 
 The solution accuracy is 
 
