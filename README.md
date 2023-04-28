@@ -171,42 +171,159 @@ The results of the evaluation (with the solution answers, the expected result, t
 The solution accuracy is 
 
 
-## INVESTIGATING_THE_LIMITATIONS_OF_TRANSFORM_apr21
-https://github.com/castorini/transformers-arithmetic
 
-* Как представлять: By introducing position tokens (e.g., “3 10e1 2”), the
-model learns to accurately add and subtract numbers up to 60 digits.
+## 1. Second approach - improve the ability of LLMs to perform addition operation
 
-* subword tokenizers and positional encodings are components in current transformer designs that might need improvement. Moreover, we
-show that regardless of the number of parameters and training examples, models cannot seem to learn addition rules that are independent of the length of the
-numbers seen during training.
-
-**введение**
-
-в трансформерах подается непонятно что и на что мы можем влиять -- With transformers, the only input to the model
-is the surface form of text combined with supplemental embeddings
-
-Это плохо
-
-Our work shows that it is possible to “inject”
-representations into transformer models by simple manipulations of the input sequence (in our case,
-explicitly enumerating the semantics of digit positions)
-
-Причем это без переобучения
+### Literature review
 
 
-Но кажется все  плохо -- если не обучались на длинных, то ничего не получится
+With transformers, the only input to the model is the surface form of text combined with supplemental embeddings.
+In [[6]](#6) authors found that how a number is represented in its surface form has a strong influence on the model’s accuracy.
+They showed  that it is possible to “inject”  representations into transformer models by simple manipulations of the input sequence (in their case,
+explicitly enumerating the semantics of digit positions), without any need to re-pretrain.
 
- Despite our best
-efforts, we find that models cannot extrapolate, i.e., they fail to perform simple arithmetic when
+
+
+However, authors conclude that regardless of the number of parameters and training examples, models cannot seem to learn addition rules that are independent of the length of the
+numbers seen during training.  Models cannot extrapolate, i.e., they fail to perform simple arithmetic when
 evaluated on inputs whose length distribution differs from the one seen during training. This appears
 to be a problem that neither larger models, more compute, nor more data can solve.
 
-О том, что все плохо как раз и пишут в статье PAL и поэтому ищут другие подходы
 
-**в каком из 6 видов представлять числа**
-10E-BASED
-причем without target position encoding
+
+
+So my solution is based on [[6]](#6), taking into account the results of their experiments with the underlying LLMs, the form of representation of numbers, training data, etc.
+
+### Solution description: few-shot promting & using a python interpreter
+
+Training, development, and test sets are programmatically generated. The input template is always “What is [number1] plus [number2]?”, where 
+[number1] and [number2] are numbers randomly sampled. 
+
+#### 1. How sets are sampled?
+Authors experimented with two methodologies:
+  
+Balanced sampling: To generate sets, first set the maximum number
+of digits D and then create each example as follows: first sample d from [2, D] and then independently sample [number1] and [number2] from
+[10^(D−1) , (10^D) − 1]. This method ensures that the set will
+have a roughly equal proportion of d-digit numbers, where d ∈ [2, D].
+
+Random sampling: To generate sets, sample [number1] and [number2] independently from
+[0, (10^D)−1]. This results in approximately 90% of the numbers having D-digits, 9% having (D−1)-
+digits, and so on. This unbalanced set aims at evaluating models on the largest numbers it was trained
+on. 
+
+The results of experiments show that when trained on the balanced distribution, the model succeeds on
+both random and balanced evaluation sets. When trained on the random distribution, it succeeds on
+the random evaluation set, but it fails on the balanced evaluation set
+
+That's why in my solution model is trained on the **balanced distribution**.
+
+
+#### 2. How numbers are represented?
+Authors experimented with 6 different number representations:
+
+```
+Orthography          Example                    Notes
+DECIMAL              832                        default representation
+CHARACTER            8 3 2                      ensures consistent tokenization
+FIXED-CHARACTER      0 8 3 2                    ensures consistent positions (e.g., max. 4 digits)
+UNDERSCORE           8_3_2                      underscores provide hints on digit significance
+WORDS                eight hundred thirty-two   leverages pretraining
+10-BASED             8 100 3 10 2               easy to determine digit significance
+10E-BASED            8 10e2 3 10e1 2 10e0       more compact encoding of above
+```
+
+Experiments show that:
+* With up to 15 digits, the 10-BASED and 10E-BASED representations achieve accuracy close to 100%.
+Authors explanation for their success is the explicit position tokens added between each digit, which
+allows the model to inspect the left or right tokens of a digit to determine its significance.
+
+
+* Authors show that with 10E-BASED representation the model learns to accurately add and subtract numbers up to 60 digits (and that's the best result within all types of representation)
+
+
+That's why in my solution numbers are represented in the **10E-BASED** form.
+
+#### 2. Regular or inverse order?
+
+Auto-regressive models  generate the output sequence token by token. Thus, to produce the first digit of the answer, which is the most
+significant one, the model has to perform all the carry operations.  Hence, the model has to
+perform the digit-wise addition (or subtraction) of all the digits in the question before generating the
+first digit of the answer. Authors call this generation order “regular”.
+
+Another way to produce an answer is by generating the least significant digits first. This order is
+perhaps easier to learn than the “regular” order because to decode each digit, the model only needs
+to add (or subtract) single digits and check if the previous digit-wise operation had a carry. Authors call
+this generation order “inverse”.
+
+*(For interpolation experiments, the models are trained and evaluated on up to 60-digit numbers. For
+extrapolation experiments, the models are trained on up to 50-digit numbers and evaluated on 60-
+digit numbers.)*
+
+Experiments results show that regardless of the model size, performed operations, amount of digits in numbers,
+the difference in accuracy is negligible between regular and inverse orders on interpolation tasks.
+However, models trained and evaluated on the regular order show higher extrapolation accuracy
+than those that use the inverse order.
+
+
+
+That's why in my solution numbers are represented in the **regular order**.
+
+*This result is perhaps surprising since one would expect that the inverse order would be easier to learn. Possible explanation: In the inverse order, the answer is generated from least to
+most significant digit, so the model might have a tendency to select the termination token right after
+it generates the most significant digit seen during training. In the regular order, however, the model
+has to predict the full length of the sequence before emitting the first and second tokens.*
+
+
+#### Model size
+
+larger models might perform better on data whose distribution is
+outside its training data distribution
+
+Although larger models perform better than smaller ones, we show that not
+even 3B-parameter models can learn simple arithmetic rules. 
+
+Extrapolation is hardly achieved when trained on fewer than 50 digits, regardless of the model size
+
+TODO my
+
+#### Data size
+Beyond a critical amount, increasing the training data does not improve extrapolation accuracy. F
+
+TODO my
+#### Training steps amount
+As
+training progresses, interpolation accuracy always reaches 100%, but extrapolation accuracy starts
+to decrease after some number of training steps. The number of training steps after which this drop
+occurs varies dramatically between runs that differ only in the seed used to generate the training
+data. 
+
+Thats why TODO my epochs
+так что надо находить наилучший результат из промежуточных
+
+#### Interesting observation
+Contrary to the hypothesis of Newman et al. (2020), we find that the end-of-sequence token does
+not seem to be the cause of extrapolation failures. For example, when a T5-770M model trained on
+30-digit numbers is evaluated on 60-digit numbers, it correctly generates the first 23 position tokens
+(i.e., from “10e60” until “10e38”) but it suddenly skips to position token “10e27”, and continues
+generating the correct position tokens until the last one (“10e0”). Here we show one such sequence:
+```
+1 10e60 0 10e59 1 10e58 2 10e57 3 10e56 0 10e55 2 10e54 7 10e53 0 10e52
+1 10e51 0 10e50 3 10e49 9 10e48 0 10e47 5 10e46 3 10e45 1 10e44 5 10e43 3
+10e42 6 10e41 3 10e40 6 10e39 0 10e38 8 10e27 1 10e26 4 10e25 1 10e24 2 10e23
+6 10e22 6 10e21 9 10e20 5 10e19 3 10e18 4 10e17 8 10e16 3 10e15 8 10e14 8
+10e13 9 10e12 5 10e11 3 10e10 5 10e9 0 10e8 6 10e7 4 10e6 3 10e5 5 10e4 6
+10e3 7 10e2 2 10e1 2 10e0
+```
+Hence, although the model correctly emits the end-of-sequence token after the “10e0” token, it
+decides to shorten the sequence in the middle of the generation, i.e., by skipping position tokens
+“10e37” until “10e28”. This skipping behavior is consistent across model sizes, dataset sizes, and
+extrapolation ranges (e.g., training on 20 digits, evaluating on 30 digits, etc.). Investigating it further
+might help us understand why neural models often fail on extrapolation tasks.
+
+
+## INVESTIGATING_THE_LIMITATIONS_OF_TRANSFORM_apr21
+
 
 **увеличение числа цифр**
 One advantage of working with arithmetic tasks is that the rules to be learned are well defined and
@@ -214,41 +331,13 @@ relatively simple. Thus, it is easy to verify if models learned such rules by ev
 numbers that are larger than the ones they were trained on. If successful, such a model would have
 no problem correctly adding or subtracting arbitrarily long numbers
 
-**прямой или обратный порядок предсказания**
-The difference in accuracy is negligible between regular and inverse orders on interpolation tasks.
-However, models trained and evaluated on the regular order show higher extrapolation accuracy
-than those that use the inverse order
-
-This result is perhaps surprising
-since one would expect that the inverse order would be easier to learn.
-
 
 **обучать с как минимум 50 цифрами**
 Extrapolation is hardly achieved when trained on fewer than 50 digits, regardless of the model size
 
 
 
-**нет смысла увеличивать обучающую выборку И на каком-то шаге обучения качество начинает падать, так что надо находить наилучший результат из промежуточных**
 
-
-
-
-### второй 
-
-python main.py --output_dir=.  --model_name_or_path=t5-base --operation=addition --orthography=10ebased --train_size=100 --val_size=10 --test_size=10 --min_digits_train=2  --max_digits_train=15 --min_digits_test=2 --max_digits_test=15 --base_number=10 --seed=1 --max_epochs=10 --check_val_every_n_epoch=2
- 
-
-
-larger models might perform better on data whose distribution i outside its training data distribution. поэтому не t5-base, а T5-3B
-
-regular_order
-
-
-
-
-## как генерируются тестовые данные 
-
--- см INVESTIGATING_THE_LIMITATIONS_OF_TRANSFORM_apr21 2 метода.
 
 
 ## References
