@@ -1,8 +1,10 @@
 from typing import Tuple
 from training import T5Finetuner
 from utils import translate_task, convert_from_10ebased
+from solutions_evaluation.abstract_solver import AbstractSolver
 
-class Solver2():
+
+class Solver2(AbstractSolver):
     def __init__(self):
         checkpoint_path = '/content/first_results/epoch=11-val_exact_match=1.0000.ckpt'
 
