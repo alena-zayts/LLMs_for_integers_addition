@@ -1,0 +1,4 @@
+num2words==0.5.12
+pytorch_lightning==1.9.0
+torch==2.0.0
+transformers==4.28.1

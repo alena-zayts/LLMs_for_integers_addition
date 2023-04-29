@@ -2,12 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="066748ca-f53d-4732-847e-2ab325f72cba" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/old_solution2/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/old_solution2/my_test.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/old_solution2/requirements_for_trainig.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/old_solution2/train_1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/solution2_10e_pretraining/requirements.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/solution2_10e_pretraining/settings_1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/solution2_10e_pretraining/training.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/solution2_10e_pretraining/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/solutions_evaluation/analyze_results.py" beforeDir="false" afterPath="$PROJECT_DIR$/solutions_evaluation/analyze_results.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/solutions_evaluation/test_examples_3.jsonl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/solutions_evaluation/test_examples_3solution1_results.jsonl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/solutions_evaluation/test_examplessolution1_results_.jsonl" beforeDir="false" afterPath="$PROJECT_DIR$/solutions_evaluation/test_examples_solution1_results.jsonl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,16 +46,16 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/solution2" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/solution2_10e_pretraining" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\alena\Desktop\8_sem\huawei_test_task\solution2_10e_pretraining" />
       <recent name="C:\Users\alena\Desktop\8_sem\huawei_test_task\solution2" />
       <recent name="C:\Users\alena\Desktop\8_sem\huawei_test_task\solution_1" />
       <recent name="C:\Users\alena\Desktop\8_sem\huawei_test_task\evaluation_data" />
       <recent name="C:\Users\alena\Desktop\8_sem\huawei_test_task\my" />
-      <recent name="C:\Users\alena\Desktop\8_sem\huawei_test_task\pal" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\alena\Desktop\8_sem\huawei_test_task\solutions_evaluation" />
@@ -360,7 +365,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682749018262</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="1 finished">
+      <created>1682749845792</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1682749845792</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -389,7 +401,8 @@
     <MESSAGE value="1 almost finished" />
     <MESSAGE value="2 description" />
     <MESSAGE value="1 results" />
-    <option name="LAST_COMMIT_MESSAGE" value="1 results" />
+    <MESSAGE value="1 finished" />
+    <option name="LAST_COMMIT_MESSAGE" value="1 finished" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
