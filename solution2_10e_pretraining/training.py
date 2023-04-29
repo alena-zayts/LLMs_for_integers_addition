@@ -14,7 +14,7 @@ from torch.utils.data import Dataset
 
 from typing import List
 
-from settings import *
+from training_settings import *
 from utils import *
 
 
