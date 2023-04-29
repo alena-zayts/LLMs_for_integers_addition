@@ -77,7 +77,7 @@ if __name__ == '__main__':
     print(x_10)
     print(x_back)
 
-    for i in range(-101, 102, 1):
+    for i in range(-10001, 10002, 1):
         print(i)
         x = str(i)
         x_10 = convert_to_10ebased(x)

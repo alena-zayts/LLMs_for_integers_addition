@@ -1,6 +1,6 @@
 from typing import Tuple
-from training import T5Finetuner
-from utils import translate_task, convert_from_10ebased
+from solution2_10e_pretraining.training import T5Finetuner
+from solution2_10e_pretraining.utils import translate_task, convert_from_10ebased
 from solutions_evaluation.abstract_solver import AbstractSolver
 
 
