@@ -3,6 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="066748ca-f53d-4732-847e-2ab325f72cba" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/solutions_evaluation/analyze_results.py" beforeDir="false" afterPath="$PROJECT_DIR$/solutions_evaluation/analyze_results.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/solutions_evaluation/test_examples_3.jsonl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/solutions_evaluation/test_examples_3solution1_results.jsonl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/solutions_evaluation/test_examplessolution1_results_.jsonl" beforeDir="false" afterPath="$PROJECT_DIR$/solutions_evaluation/test_examples_solution1_results.jsonl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +60,7 @@
       <recent name="C:\Users\alena\Desktop\8_sem\huawei_test_task\few_shot_with_py\eval_results" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main2">
+  <component name="RunManager" selected="Python.analyze_results">
     <configuration name="analyze_results" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="huawei_test_task" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -184,10 +189,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.analyze_results" />
         <item itemvalue="Python.evaluate (1)" />
         <item itemvalue="Python.main2" />
         <item itemvalue="Python.generate_numbers_to_sum" />
-        <item itemvalue="Python.analyze_results" />
         <item itemvalue="Python.solver" />
       </list>
     </recent_temporary>
@@ -348,7 +353,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682701527818</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="1 results">
+      <created>1682749018262</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1682749018262</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -376,7 +388,8 @@
     <MESSAGE value="editing readme" />
     <MESSAGE value="1 almost finished" />
     <MESSAGE value="2 description" />
-    <option name="LAST_COMMIT_MESSAGE" value="2 description" />
+    <MESSAGE value="1 results" />
+    <option name="LAST_COMMIT_MESSAGE" value="1 results" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

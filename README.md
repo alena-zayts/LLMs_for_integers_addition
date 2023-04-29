@@ -180,7 +180,9 @@ The chosen metric is accuracy (with the requirement that the result of the solut
 
 The results of the evaluation (with the solution answers, the expected result, time spent, generated code for each test example) can be found in in the file `solutions_evaluation/test_examples_solution1_results.jsonl`
 
-The solution accuracy is 
+The solution accuracy is 0.97.
+
+In two examples out of three where the solution failed the problem was that the runtime could not evaluate the generated code (with cur_d 30 and 70), and in the last one -- the answer was wrong: different sign and absolute value (with cur_d=40) 
 
 
 
