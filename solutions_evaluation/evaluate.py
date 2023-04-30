@@ -62,4 +62,4 @@ def evaluate(test_filename: str, output_filename_postfix: str, solverClass, cont
 
 
 # evaluate('test_examples.jsonl', 'solution1_results_', Solver1, continue_experiment=True)
-evaluate('test_examples.jsonl', 'solution2_results_', Solver2, continue_experiment=True)
+# evaluate('test_examples.jsonl', 'solution2_results_', Solver2, continue_experiment=True)

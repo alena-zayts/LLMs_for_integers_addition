@@ -3,11 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="066748ca-f53d-4732-847e-2ab325f72cba" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/solution2_10e_pretraining/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/solution2_10e_pretraining/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/solution2_10e_pretraining/solver.py" beforeDir="false" afterPath="$PROJECT_DIR$/solution2_10e_pretraining/solver.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/solution2_10e_pretraining/training.py" beforeDir="false" afterPath="$PROJECT_DIR$/solution2_10e_pretraining/training.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/old_solution2/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/old_solution2/my_test.ipynb" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/old_solution2/requirements_for_trainig.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/old_solution2/train_1.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/solution2_10e_pretraining/training_settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/solution2_10e_pretraining/training_settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/solution2_10e_pretraining/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/solution2_10e_pretraining/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/solutions_evaluation/evaluate.py" beforeDir="false" afterPath="$PROJECT_DIR$/solutions_evaluation/evaluate.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +42,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/solutions_evaluation" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../tmp2" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -60,7 +61,7 @@
       <recent name="C:\Users\alena\Desktop\8_sem\huawei_test_task\few_shot_with_py\eval_results" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.utils">
+  <component name="RunManager" selected="Python.training">
     <configuration name="analyze_results" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="huawei_test_task" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -74,27 +75,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/solutions_evaluation/analyze_results.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="evaluate (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="huawei_test_task" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/solutions_evaluation" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/solutions_evaluation/evaluate.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -166,6 +146,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="training" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="huawei_test_task" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/solution2_10e_pretraining" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/solution2_10e_pretraining/training.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="utils" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="huawei_test_task" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -189,11 +190,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.training" />
         <item itemvalue="Python.utils" />
         <item itemvalue="Python.generate_numbers_to_sum" />
         <item itemvalue="Python.solver" />
         <item itemvalue="Python.analyze_results" />
-        <item itemvalue="Python.evaluate (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -388,7 +389,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682780422916</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="2 in progress">
+      <created>1682784455748</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1682784455748</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

@@ -8,7 +8,7 @@ STEP_SIZE = 1000
 
 OPTIMIZER_NAME = 'AdamW'
 MAX_SEQ_LEN = 512
-CHECK_VAL_EVERY_N_EPOCH = 2
+CHECK_VAL_EVERY_N_EPOCH = 1
 MAX_EPOCHS = 20
 GPUS = 1
 
@@ -20,8 +20,8 @@ GPUS = 1
 # MIN_DIGITS_TEST = 2
 # MAX_DIGITS_TEST = 15
 
-OUTPUT_DIR = 'second_results'
-MODEL_NAME = 't5-base'  # t5-small, t5-base
+OUTPUT_DIR = 'solution2_10e_pretraining/training_results'
+MODEL_NAME = 't5-big'  # t5-small, t5-base
 MIN_DIGITS_TRAIN = 2
 MAX_DIGITS_TRAIN = 40
 MIN_DIGITS_TEST = 2
