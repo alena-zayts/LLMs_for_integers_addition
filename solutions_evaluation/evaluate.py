@@ -61,5 +61,6 @@ def evaluate(test_filename: str, output_filename_postfix: str, solverClass, cont
             print(f'Current accuracy - {sum(scores) / len(scores)}')
 
 
-# evaluate('test_examples.jsonl', 'solution1_results_', Solver1, continue_experiment=True)
-# evaluate('test_examples.jsonl', 'solution2_results_', Solver2, continue_experiment=True)
+# evaluate('test_examples.jsonl', '_solution1_results', Solver1, continue_experiment=True)
+# evaluate('test_examples.jsonl', '_solution2_results', Solver2, continue_experiment=False)
+evaluate('test_examples_upto15.jsonl', '_solution2_results', Solver2, continue_experiment=False)

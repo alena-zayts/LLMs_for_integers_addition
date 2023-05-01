@@ -60,4 +60,4 @@ def sample_with_step(filename='test_examples.jsonl', n_each=5, min_d=10, max_d=1
 
 if __name__ == '__main__':
     # sample_with_step()
-    sample_with_step(filename='test_examples_up_to_15.jsonl', n_each=3, min_d=2, max_d=16, step_d=1)
+    sample_with_step(filename='test_examples_upto15.jsonl', n_each=3, min_d=2, max_d=16, step_d=1)

@@ -1,9 +1,17 @@
 # LLMs for the two long integers addition 
 
+Clone thos repository and create an environment using requirements.txt:
+```
+conda create --name <env> --file requirements.txt
+```
+or
+```
+pip install -r requirements.txt
+```
 
 # Problem description
 
-Adapt a large language model (not more than 4B parameters) to solve the problem of addition of two long integers (as many digits as possible).
+Adapt a large language model (LLM) (not more than 4B parameters) to solve the problem of addition of two long integers (as many digits as possible).
 The quality will be measured on a randomly generated set of numbers of different lengths.
 
 
@@ -13,7 +21,7 @@ The quality will be measured on a randomly generated set of numbers of different
 ## 1. First approach - teach a model with demonstrations
 
 ### Literature review
-The first possible direction of solving the problem of addition of two long integers as one of the mathematical problems is to 'teach' language models the process of reasoning.
+The first possible direction of solving the problem of addition of two long integers as one of the mathematical problems is to teach language models the process of reasoning.
 Recently, LLMs have shown impressive success on a wide range of tasks by using this approach.
 
 For example, paper [[1]](#1) demonstrates that by **fine-tuning** an autoregressive language model (GPT-Neo) on appropriately structured step-by-step demonstrations, it is possible to teach it to execute 
@@ -40,7 +48,7 @@ equations with an external **symbolic solver** that can solve them
 My first solution was mostly inspired by and based on paper [[3]](#3). Here are some reasons:
 
 1. It has been shown in [[2]](#2) that their approach is more effective for more difficult problems that require declarative reasoning while the 
-results on simple tasks like ours (addition of two long integers) [[2]](#2) and [[3]](#3) show comparable results.
+results on simple tasks like ours (addition of two integers) [[2]](#2) and [[3]](#3) show comparable results.
 
 
 2. Since python 3 has [no more limit to value of integers](https://docs.python.org/3/whatsnew/3.0.html#integers), almost all limits for the length of
@@ -52,13 +60,13 @@ results on simple tasks like ours (addition of two long integers) [[2]](#2) and 
    So the main thing to focus on is performing arithmetic accurately which is esay to do using python.
 
    
-4. In [[3]](#3) authors show that their approach PAL (Program-Aided Language models) can work with weaker models, while its benefit over chain-of-thought scales elegantly to stronger models as well. As far as we have a limitation of model size (not more than 4B parameters) in the task, this is an important inference.
+4. In [[3]](#3) authors show that their approach PAL (Program-Aided Language models) can work with weaker models (while its benefit over chain-of-thought scales elegantly to stronger models as well). As far as we have a limitation of model size (not more than 4B parameters) in the task, this is an important inference.
 
 
 
 #### Few-shot idea
 
-Few-shot prompting does not require task-specific fine-tuning of the base model, so it does not modify the underlying LLM
+Few-shot prompting does not require task-specific fine-tuning of the base model, so it does not modify the underlying LLM.
 It leverages the strength of large-language
 models to solve a task with a set of k examples that are provided as part of the test-time input, where k is usually a number in the low single digits ([[4]](#4)). 
 These input-output  examples {(xi, yi)}, i=1;k are concatenated in a prompt p ≡ (x1 · y1) || (x2 · y2) || ... || (xk · yk). where “·” denotes
@@ -66,10 +74,10 @@ the concatenation of an input and output, and “||” indicate
 the concatenation of different examples. During inference,
 a test instance xtest is appended to the prompt, and p || xtest
 is passed to the model which attempts to complete p || xtest,
-and thereby generate an answer ytest. Note that such few-shot prompting .
+and thereby generate an answer ytest.
 
 #### Prompting
-My prompt consists of 4 examples of the task of addition of two numbers (both positive, first negative and second positive, first positive and second negative, both negative) with their code solutions and the *target* task question.
+My prompt consists of 4 examples of the task of addition of two numbers (both positive, first negative and second positive, first positive and second negative, both negative) with their code solutions and the target task question.
 For example, if we need to add 2 and 3 then the prompt would be:
 
 ```
@@ -104,11 +112,11 @@ Q: What is 2 plus 3?
 # solution in Python:
 ```
 
-(using fewer examples it is possible to reduce the response time of the model. However solution evaluation shows tha at least theese 4 examples (with all combinations of positive and negative summands) should be shown. Otherwise, the model fails mostly on the tasks that have a combination that it has not seen)
+(using fewer examples it is possible to reduce the response time of the model. However, solution evaluation shows tha at least these 4 examples (with all combinations of positive and negative summands) should be shown. Otherwise, the model fails mostly on the tasks that have a combination that it has not seen)
 
 #### Base model
-In the original paper authors mostly used CODEX (specifically, code-davinci-002) as a backend LLM. However Codex models are now [deprecated](https://platform.openai.com/docs/models/codex). Moreover, all of them do not satisfy the limitation on the number of base LLM parameters (4B).
-They were descendants of our GPT-3 models that would understand and generate code. 
+In the original paper authors mostly used CODEX (specifically, code-davinci-002) as a backend LLM. They were descendants of GPT-3 models that would understand and generate code. 
+However, Codex models are now [deprecated](https://platform.openai.com/docs/models/codex). Moreover, all of them do not satisfy the limitation on the number of base LLM parameters (4B).
 
 In original paper [[3]](#3) authors show that this approach performs better when the base model either has high 'code modeling ability' or
 it is a 'sufficiently strong' natural language model (which requires billions of parameters). 
@@ -129,7 +137,7 @@ and "350M" refers to the number of trainable parameters.
 ```
 
 #### Solution steps
-Given to numbers for addition:
+Given two numbers for addition:
 
 1. Create the described prompt 
    (see `solution1_few_shot_with_python/prompt_generation.py`)
@@ -145,7 +153,9 @@ Given to numbers for addition:
 
 #### Usage
 
-a) Run from /solution1_few_shot_with_python in the command line command
+(the response may take a long time)
+
+a) Run command in the command line from /solution1_few_shot_with_python 
 ``` 
 python main.py --a=2 --b=3
 ```
@@ -186,8 +196,8 @@ In two examples out of three where the solution failed the problem was that the 
 
 
 
-## 1. Second approach - improve the ability of LLMs to perform addition operation
-# Train and evalute T5 on arithmetic problems.
+## 2. Second approach - improve the ability of LLMs to perform addition operation
+
 ### Literature review
 
 
@@ -206,10 +216,13 @@ to be a problem that neither larger models, more compute, nor more data can solv
 
 
 
-So my solution is based on [[6]](#6), taking into account the results of their experiments with the underlying LLMs, the form of representation of numbers, training data, etc.
+My solution is based on [[6]](#6), taking into account the results of their experiments with the underlying LLMs, the form of representation of numbers, training data, etc.
 
-### Solution description: few-shot promting & using a python interpreter
+### Solution description: train T5 on arithmetic problems.
 
+First, we will discuss the process of training the model
+
+#### 0. Question form
 Training, development, and test sets are programmatically generated. The input template is always “What is [number1] plus [number2]?”, where 
 [number1] and [number2] are numbers randomly sampled. 
 
@@ -258,7 +271,7 @@ allows the model to inspect the left or right tokens of a digit to determine its
 
 That's why in my solution numbers are represented in the **10E-BASED** form.
 
-#### 2. Regular or inverse order?
+#### 3. Regular or inverse order?
 
 Auto-regressive models  generate the output sequence token by token. Thus, to produce the first digit of the answer, which is the most
 significant one, the model has to perform all the carry operations.  Hence, the model has to
@@ -291,30 +304,28 @@ has to predict the full length of the sequence before emitting the first and sec
 
 #### Model size
 
-larger models might perform better on data whose distribution is
-outside its training data distribution
+Experiments show that larger models might perform better on data whose distribution is
+outside its training data distribution. Although larger models perform better than smaller ones, authors show that not
+even 3B-parameter models can learn simple arithmetic rules for infinitely large numbers. Extrapolation is hardly achieved when trained on fewer than 50 digits, regardless of the model size
 
-Although larger models perform better than smaller ones, we show that not
-even 3B-parameter models can learn simple arithmetic rules. 
+Due to the limitation of model size in the task and my limited computing resources, **I use [t5-base model](https://huggingface.co/t5-base) with 220 million parameters as a base model** with the expectation that with an increase in the number of parameters in the base model (i.e. using [t5-large](https://huggingface.co/t5-large) model with 770 million parameters) the performance will increase.
 
-Extrapolation is hardly achieved when trained on fewer than 50 digits, regardless of the model size
 
-TODO my
 
 #### Data size
-Beyond a critical amount, increasing the training data does not improve extrapolation accuracy. F
+Authors show that beyond a critical amount, increasing the training data does not improve extrapolation accuracy. 
 
-TODO my
+That's why I use a **training dataset with 100000 examples** as recommended by the authors
+
+
 #### Training steps amount
 As
 training progresses, interpolation accuracy always reaches 100%, but extrapolation accuracy starts
 to decrease after some number of training steps. The number of training steps after which this drop
-occurs varies dramatically between runs that differ only in the seed used to generate the training
-data. 
+occurs varies dramatically between runs that differ only in the seed used to generate the training data.
+That's why checkpoints with the best performance are saved after each epoch end.
 
-Thats why TODO my epochs
-так что надо находить наилучший результат из промежуточных
-
+№№ here
 #### Interesting observation
 Contrary to the hypothesis of Newman et al. (2020), we find that the end-of-sequence token does
 not seem to be the cause of extrapolation failures. For example, when a T5-770M model trained on

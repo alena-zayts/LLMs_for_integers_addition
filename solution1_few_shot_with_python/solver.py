@@ -1,6 +1,6 @@
 from transformers import AutoTokenizer, AutoModelForCausalLM
-from solution1_few_shot_with_python.prompt_generation import CODE_START_MARKER, EXAMPLES_AMOUNT, QUESTION_START_MARKER, \
-    generate_prompt, count_code_answer_length, FUNCTION_CALL
+from solution1_few_shot_with_python.prompt_generation import QUESTION_START_MARKER, generate_prompt, \
+    count_code_answer_length, FUNCTION_CALL
 from solution1_few_shot_with_python.runtime import GenericRuntime
 from typing import List
 from solutions_evaluation.abstract_solver import AbstractSolver
@@ -56,6 +56,7 @@ if __name__ == '__main__':
     expected = a + b
     answer_int, meta_info = solver.calc_sum(a, b)
 
-    print(meta_info)
-    print(answer_int)
-    print(expected)
+    print(f'Meta-info: {meta_info}')
+    print(f"Model's answer: {answer_int}")
+    print(f'Expected answer: {expected}')
+    print(f'Correct?: {expected == answer_int}')
