@@ -160,7 +160,7 @@ Given two numbers for addition:
 
 a) Run in the command line
 ``` 
-solution1_few_shot_with_python/python main.py --a=2 --b=3
+python solution1_few_shot_with_python/main.py --a=2 --b=3
 ```
 where `a` and `b` are the two integers to sum.
 The result would be a string: `a + b = x` where a, b - given numbers and x is the produced result.

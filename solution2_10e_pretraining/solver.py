@@ -8,16 +8,14 @@ from utils import translate_task, convert_from_10ebased
 
 class Solver2:
     def __init__(self):
-        # checkpoint_path = 'pretrained_model.ckpt'
-        cur_dir = os.path.basename(os.getcwd())
 
+        checkpoints = glob.glob("*.ckpt", recursive=True)
+        if not checkpoints:
+            checkpoints = glob.glob("solution2_10e_pretraining\\*.ckpt", recursive=True)
+            if not checkpoints:
+                raise ValueError('Downlad and save a pretrained model as solution2_10e_pretraining/pretrained_model.ckpt first! (https://drive.google.com/file/d/1kcatj1OOMO8AU1DP6UW4kj82OxikBb4a/view?usp=share_link)')
 
-        if cur_dir == 'solution2_10e_pretraining\\':
-            root_dir = '.'
-        else:
-            root_dir = 'solution2_10e_pretraining\\'
-
-        checkpoint_path = glob.glob(f"{root_dir}*.ckpt")[0]
+        checkpoint_path = checkpoints[0]
 
         self.model = T5Finetuner.load_from_checkpoint(checkpoint_path,
                                                       train_dataloader=None,

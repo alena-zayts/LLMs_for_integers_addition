@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="066748ca-f53d-4732-847e-2ab325f72cba" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_requirements__/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/solution2_10e_pretraining/solver.py" beforeDir="false" afterPath="$PROJECT_DIR$/solution2_10e_pretraining/solver.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,14 +51,14 @@
       <recent name="C:\Users\alena\Desktop\8_sem\huawei_test_task\solution_1" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\alena\Desktop\8_sem\huawei_test_task\old_requirements__" />
       <recent name="C:\Users\alena\Desktop\8_sem\huawei_test_task\old_requirements" />
       <recent name="C:\Users\alena\Desktop\8_sem\huawei_test_task\solution2_10e_pretraining" />
       <recent name="C:\Users\alena\Desktop\8_sem\huawei_test_task" />
       <recent name="C:\Users\alena\Desktop\8_sem\huawei_test_task\solutions_evaluation" />
-      <recent name="C:\Users\alena\Desktop\8_sem\huawei_test_task\few_shot_with_py" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.analyze_results2">
+  <component name="RunManager" selected="Python.solver">
     <configuration name="analyze_results2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="huawei_test_task" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -119,7 +122,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="generate_numbers_to_sum" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="huawei_test_task" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -127,11 +130,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/solutions_evaluation" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/solution2_10e_pretraining" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/solutions_evaluation/generate_numbers_to_sum.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/solution2_10e_pretraining/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -163,11 +166,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.solver" />
+        <item itemvalue="Python.main" />
         <item itemvalue="Python.analyze_results2" />
         <item itemvalue="Python.evaluate" />
         <item itemvalue="Python.compress" />
-        <item itemvalue="Python.solver" />
-        <item itemvalue="Python.generate_numbers_to_sum" />
       </list>
     </recent_temporary>
   </component>
@@ -404,7 +407,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682949843597</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="prepare for sharing">
+      <created>1682951538536</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1682951538536</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -438,7 +448,8 @@
     <MESSAGE value="q" />
     <MESSAGE value="almost there" />
     <MESSAGE value="finish readme" />
-    <option name="LAST_COMMIT_MESSAGE" value="finish readme" />
+    <MESSAGE value="prepare for sharing" />
+    <option name="LAST_COMMIT_MESSAGE" value="prepare for sharing" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -455,7 +466,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/solution1_few_shot_with_python/solver.py</url>
-          <line>38</line>
+          <line>37</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
