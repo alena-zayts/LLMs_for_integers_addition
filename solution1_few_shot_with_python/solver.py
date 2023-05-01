@@ -1,12 +1,11 @@
 from transformers import AutoTokenizer, AutoModelForCausalLM
-from solution1_few_shot_with_python.prompt_generation import QUESTION_START_MARKER, generate_prompt, \
+from prompt_generation import QUESTION_START_MARKER, generate_prompt, \
     count_code_answer_length, FUNCTION_CALL
-from solution1_few_shot_with_python.runtime import GenericRuntime
+from runtime import GenericRuntime
 from typing import List
-from solutions_evaluation.abstract_solver import AbstractSolver
 
 
-class Solver1(AbstractSolver):
+class Solver1:
     def __init__(self):
         self.tokenizer = AutoTokenizer.from_pretrained("Salesforce/codegen-350M-mono")
         self.model = AutoModelForCausalLM.from_pretrained("Salesforce/codegen-350M-mono")

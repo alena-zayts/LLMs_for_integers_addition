@@ -158,9 +158,9 @@ Given two numbers for addition:
 
 (the response may take a long time)
 
-a) Run command in the command line from /solution1_few_shot_with_python 
+a) Run in the command line
 ``` 
-python main.py --a=2 --b=3
+solution1_few_shot_with_python/python main.py --a=2 --b=3
 ```
 where `a` and `b` are the two integers to sum.
 The result would be a string: `a + b = x` where a, b - given numbers and x is the produced result.
@@ -349,9 +349,9 @@ Given two numbers for addition:
 
 (Don't forget to [download a pretrained model](https://drive.google.com/file/d/1kcatj1OOMO8AU1DP6UW4kj82OxikBb4a/view?usp=share_link) and save it as `solution2_10e_pretraining/pretrained_model.ckpt`)
 
-a) Run command in the command line from /solution2_10e_pretraining 
+a) Run in the command line 
 ``` 
-python main.py --a=2 --b=3
+python solution2_10e_pretraining/main.py --a=2 --b=3
 ```
 where `a` and `b` are the two integers to sum.
 The result would be a string: `a + b = x` where a, b - given numbers and x is the produced result.

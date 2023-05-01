@@ -14,15 +14,12 @@ from torch.utils.data import Dataset
 
 from typing import List
 
-from solution2_10e_pretraining.training_settings import *
-from solution2_10e_pretraining.utils import *
+from training_settings import *
+from utils import *
 
 class T5Finetuner(pl.LightningModule):
     def __init__(self, train_dataloader, val_dataloader, test_dataloader):
         super(T5Finetuner, self).__init__()
-
-        print(MODEL_NAME)
-        print(OUTPUT_DIR)
 
         self.tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
         self.model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_NAME)

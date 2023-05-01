@@ -1,5 +1,5 @@
 import argparse
-from solution2_10e_pretraining.solver import Solver2
+from solver import Solver2
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Train and evalute T5 on arithmetic problems.')

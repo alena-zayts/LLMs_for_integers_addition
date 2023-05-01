@@ -2,23 +2,21 @@ from typing import Tuple
 import torch
 import glob
 import os
-from solution2_10e_pretraining.training import T5Finetuner
-from solution2_10e_pretraining.utils import translate_task, convert_from_10ebased
-from solutions_evaluation.abstract_solver import AbstractSolver
+from training import T5Finetuner
+from utils import translate_task, convert_from_10ebased
 
 
-class Solver2(AbstractSolver):
+class Solver2:
     def __init__(self):
         # checkpoint_path = 'pretrained_model.ckpt'
         cur_dir = os.path.basename(os.getcwd())
-        print(os.getcwd())
-        print(os.path.basename(os.getcwd()))
+
+
         if cur_dir == 'solution2_10e_pretraining\\':
             root_dir = '.'
         else:
-            root_dir = '..\\solution2_10e_pretraining\\'
+            root_dir = 'solution2_10e_pretraining\\'
 
-        print(glob.glob(f"{root_dir}*.ckpt"))
         checkpoint_path = glob.glob(f"{root_dir}*.ckpt")[0]
 
         self.model = T5Finetuner.load_from_checkpoint(checkpoint_path,

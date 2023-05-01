@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="066748ca-f53d-4732-847e-2ab325f72cba" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/old_requirements/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/solutions_evaluation/analyze_results2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/solution2_10e_pretraining/solution2_trainig_notebook.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/solution2_10e_pretraining/solution2_training_notebook.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/solution2_10e_pretraining/training_settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/solution2_10e_pretraining/training_settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/solutions_evaluation/analyze_results.py" beforeDir="false" afterPath="$PROJECT_DIR$/solutions_evaluation/analyze_results1.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -403,7 +397,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682941321407</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="finish readme">
+      <created>1682949843597</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1682949843597</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -436,7 +437,8 @@
     <MESSAGE value="2 in progress" />
     <MESSAGE value="q" />
     <MESSAGE value="almost there" />
-    <option name="LAST_COMMIT_MESSAGE" value="almost there" />
+    <MESSAGE value="finish readme" />
+    <option name="LAST_COMMIT_MESSAGE" value="finish readme" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
