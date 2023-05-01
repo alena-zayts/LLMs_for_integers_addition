@@ -2,19 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="066748ca-f53d-4732-847e-2ab325f72cba" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/old_requirements/requirements.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/solutions_evaluation/analyze_results2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_requirements/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_requirements/requirements2.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/solution1_few_shot_with_python/solver.py" beforeDir="false" afterPath="$PROJECT_DIR$/solution1_few_shot_with_python/solver.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/solution2_10e_pretraining/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/old_requirements/requirements__2.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/solution2_10e_pretraining/solver.py" beforeDir="false" afterPath="$PROJECT_DIR$/solution2_10e_pretraining/solver.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/solution2_trainig_notebook.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/solution2_10e_pretraining/solution2_trainig_notebook.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/solutions_evaluation/evaluate.py" beforeDir="false" afterPath="$PROJECT_DIR$/solutions_evaluation/evaluate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/solutions_evaluation/generate_numbers_to_sum.py" beforeDir="false" afterPath="$PROJECT_DIR$/solutions_evaluation/generate_numbers_to_sum.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/solutions_evaluation/test_examples_up_to_15.jsonl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/solutions_evaluation/test_examples_up_to_15solution2_results_.jsonl" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/solutions_evaluation/test_examplessolution2_results_.jsonl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/solution2_10e_pretraining/solution2_trainig_notebook.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/solution2_10e_pretraining/solution2_training_notebook.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/solution2_10e_pretraining/training_settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/solution2_10e_pretraining/training_settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/solutions_evaluation/analyze_results.py" beforeDir="false" afterPath="$PROJECT_DIR$/solutions_evaluation/analyze_results1.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,14 +42,14 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/solution2_10e_pretraining" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/solutions_evaluation" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\alena\Desktop\8_sem\huawei_test_task\solutions_evaluation" />
       <recent name="C:\Users\alena\Desktop\8_sem\huawei_test_task\solution2_10e_pretraining" />
       <recent name="C:\Users\alena\Desktop\8_sem\huawei_test_task" />
-      <recent name="C:\Users\alena\Desktop\8_sem\huawei_test_task\solutions_evaluation" />
       <recent name="C:\Users\alena\Desktop\8_sem\huawei_test_task\solution2" />
       <recent name="C:\Users\alena\Desktop\8_sem\huawei_test_task\solution_1" />
     </key>
@@ -67,7 +61,28 @@
       <recent name="C:\Users\alena\Desktop\8_sem\huawei_test_task\few_shot_with_py" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.evaluate">
+  <component name="RunManager" selected="Python.analyze_results2">
+    <configuration name="analyze_results2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="huawei_test_task" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/solutions_evaluation" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/solutions_evaluation/analyze_results2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="compress" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="huawei_test_task" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -131,27 +146,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="main (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="huawei_test_task" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/solution1_few_shot_with_python" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/solution1_few_shot_with_python/main.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="solver" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="huawei_test_task" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -175,11 +169,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.analyze_results2" />
         <item itemvalue="Python.evaluate" />
         <item itemvalue="Python.compress" />
         <item itemvalue="Python.solver" />
         <item itemvalue="Python.generate_numbers_to_sum" />
-        <item itemvalue="Python.main (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -402,7 +396,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682894202281</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="almost there">
+      <created>1682941321407</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1682941321407</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -434,7 +435,8 @@
     <MESSAGE value="1 finished" />
     <MESSAGE value="2 in progress" />
     <MESSAGE value="q" />
-    <option name="LAST_COMMIT_MESSAGE" value="q" />
+    <MESSAGE value="almost there" />
+    <option name="LAST_COMMIT_MESSAGE" value="almost there" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

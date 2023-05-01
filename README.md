@@ -1,6 +1,8 @@
 # LLMs for the two long integers addition 
 
-Clone thos repository and create an environment using requirements.txt:
+1. Clone this repository
+   
+2. Create an environment using requirements.txt:
 ```
 conda create --name <env> --file requirements.txt
 ```
@@ -8,6 +10,7 @@ or
 ```
 pip install -r requirements.txt
 ```
+3. For the second solution: [download a pretrained model](https://drive.google.com/file/d/1kcatj1OOMO8AU1DP6UW4kj82OxikBb4a/view?usp=share_link) and save it in `solution2_10e_pretraining/pretrained_model.ckpt`
 
 # Problem description
 
@@ -18,7 +21,7 @@ The quality will be measured on a randomly generated set of numbers of different
 
 # Solutions
 
-## 1. First approach - teach a model with demonstrations
+## 1. First approach - teach a model with demonstrations and use a runtime
 
 ### Literature review
 The first possible direction of solving the problem of addition of two long integers as one of the mathematical problems is to teach language models the process of reasoning.
@@ -42,7 +45,7 @@ reasoning steps, but offloads the solution step to a runtime (**Python interpret
 equations with an external **symbolic solver** that can solve them
 
 
-### Solution description: few-shot promting & using a python interpreter
+### Solution description: few-shot prompting & using a python interpreter
 
 #### Motivation
 My first solution was mostly inspired by and based on paper [[3]](#3). Here are some reasons:
@@ -56,8 +59,8 @@ results on simple tasks like ours (addition of two integers) [[2]](#2) and [[3]]
    
 
 3. Large Numbers or Incorrect Reasoning? In [[3]](#3) authors show that 
-   the primary failure mode during working with large numbers is the inability to perform such arithmetic accurately, not the wrong generated solution steps  
-   So the main thing to focus on is performing arithmetic accurately which is esay to do using python.
+   the primary failure mode during working with large numbers is the inability to perform such arithmetic accurately, not the wrong generated solution steps. 
+   So the main thing to focus on is performing arithmetic accurately which is easy to do using python.
 
    
 4. In [[3]](#3) authors show that their approach PAL (Program-Aided Language models) can work with weaker models (while its benefit over chain-of-thought scales elegantly to stronger models as well). As far as we have a limitation of model size (not more than 4B parameters) in the task, this is an important inference.
@@ -77,7 +80,7 @@ is passed to the model which attempts to complete p || xtest,
 and thereby generate an answer ytest.
 
 #### Prompting
-My prompt consists of 4 examples of the task of addition of two numbers (both positive, first negative and second positive, first positive and second negative, both negative) with their code solutions and the target task question.
+My prompt consists of 4 examples of the task of addition of two numbers (both positive, first negative and second positive, first positive and second negative, both negative) with their code solutions, and the target task question.
 For example, if we need to add 2 and 3 then the prompt would be:
 
 ```
@@ -115,10 +118,10 @@ Q: What is 2 plus 3?
 (using fewer examples it is possible to reduce the response time of the model. However, solution evaluation shows tha at least these 4 examples (with all combinations of positive and negative summands) should be shown. Otherwise, the model fails mostly on the tasks that have a combination that it has not seen)
 
 #### Base model
-In the original paper authors mostly used CODEX (specifically, code-davinci-002) as a backend LLM. They were descendants of GPT-3 models that would understand and generate code. 
+In the original paper authors used mostly CODEX models (specifically, code-davinci-002) as a backend LLM. They were descendants of GPT-3 models that would understand and generate code. 
 However, Codex models are now [deprecated](https://platform.openai.com/docs/models/codex). Moreover, all of them do not satisfy the limitation on the number of base LLM parameters (4B).
 
-In original paper [[3]](#3) authors show that this approach performs better when the base model either has high 'code modeling ability' or
+In original paper [[3]](#3) authors show that this approach performs better when the base model either has high 'code modeling ability', or
 it is a 'sufficiently strong' natural language model (which requires billions of parameters). 
 
 That's why it was decided to use a model with high “code modeling ability” and way less than 4B params:
@@ -169,7 +172,7 @@ a = 2
 b = 3
 answer_int, meta_info = solver.calc_sum(a, b)
 ```
-Its main method calc_sum takes as arguments two integers to sum and returns the integer result of summation and a dict with meta_info (i.e. the created promt, full model response, chosen code)
+Its main method calc_sum takes as arguments two integers to sum and returns the integer result of summation, and a dict with meta_info (i.e. the created prompt, full model response, chosen code)
 
 
 
@@ -188,7 +191,7 @@ The evaluation was produced by script `solutions_evaluation/evaluate.py`.
 
 The chosen metric is accuracy (with the requirement that the result of the solution must *exactly* match the expected)
 
-The results of the evaluation (with the solution answers, the expected result, time spent, generated code for each test example) can be found in in the file `solutions_evaluation/test_examples_solution1_results.jsonl`
+The results of the evaluation (with the solution answers, the expected result, time spent, generated code for each test example) can be found in the file `solutions_evaluation/test_examples_solution1_results.jsonl`
 
 The solution accuracy is 0.97.
 
@@ -220,7 +223,7 @@ My solution is based on [[6]](#6), taking into account the results of their expe
 
 ### Solution description: train T5 on arithmetic problems.
 
-First, we will discuss the process of training the model
+First, we will discuss the process of training the model (see solution2_10e_pretraining: solution2_training_notebook.ipynb, training.py, training_settings.py, utils.py)
 
 #### 0. Question form
 Training, development, and test sets are programmatically generated. The input template is always “What is [number1] plus [number2]?”, where 
@@ -287,7 +290,7 @@ this generation order “inverse”.
 extrapolation experiments, the models are trained on up to 50-digit numbers and evaluated on 60-
 digit numbers.)*
 
-Experiments results show that regardless of the model size, performed operations, amount of digits in numbers,
+Experiment results show that regardless of the model size, performed operations, amount of digits in numbers,
 the difference in accuracy is negligible between regular and inverse orders on interpolation tasks.
 However, models trained and evaluated on the regular order show higher extrapolation accuracy
 than those that use the inverse order.
@@ -297,7 +300,7 @@ than those that use the inverse order.
 That's why in my solution numbers are represented in the **regular order**.
 
 *This result is perhaps surprising since one would expect that the inverse order would be easier to learn. Possible explanation: In the inverse order, the answer is generated from least to
-most significant digit, so the model might have a tendency to select the termination token right after
+a most significant digit, so the model might have a tendency to select the termination token right after
 it generates the most significant digit seen during training. In the regular order, however, the model
 has to predict the full length of the sequence before emitting the first and second tokens.*
 
@@ -312,58 +315,93 @@ Due to the limitation of model size in the task and my limited computing resourc
 
 
 
-#### Data size
+#### Training dataset size
 Authors show that beyond a critical amount, increasing the training data does not improve extrapolation accuracy. 
 
-That's why I use a **training dataset with 100000 examples** as recommended by the authors
+That's why I use a **training dataset with 100000 examples and validation dataset with 10000 examples** as recommended by the authors.
+Due to the limited computing resources training dataset consists of numbers with **up to 15 digits** only.
 
 
 #### Training steps amount
-As
-training progresses, interpolation accuracy always reaches 100%, but extrapolation accuracy starts
+As training progresses, interpolation accuracy always reaches 100%, but extrapolation accuracy starts
 to decrease after some number of training steps. The number of training steps after which this drop
 occurs varies dramatically between runs that differ only in the seed used to generate the training data.
 That's why checkpoints with the best performance are saved after each epoch end.
 
-№№ here
-#### Interesting observation
-Contrary to the hypothesis of Newman et al. (2020), we find that the end-of-sequence token does
-not seem to be the cause of extrapolation failures. For example, when a T5-770M model trained on
-30-digit numbers is evaluated on 60-digit numbers, it correctly generates the first 23 position tokens
-(i.e., from “10e60” until “10e38”) but it suddenly skips to position token “10e27”, and continues
-generating the correct position tokens until the last one (“10e0”). Here we show one such sequence:
+
+#### Solution steps
+
+(see solution2_10e_pretraining/solver.py)
+
+The pretrained model was saved in solution2_10e_pretraining/pretrained_model.ckpt
+
+Given two numbers for addition:
+
+
+1. Load a pretrained model
+2. Form a question in a described form (“What is [number1] plus [number2]?” with 10e-based regular order numbers representation)
+3. Send the question to the model and get its response (10e-based regular order number is expected)
+4. Convert the response to a usual form
+5. Return the answer in a usual form as a result 
+
+
+#### Usage
+
+(Don't forget to [download a pretrained model](https://drive.google.com/file/d/1kcatj1OOMO8AU1DP6UW4kj82OxikBb4a/view?usp=share_link) and save it as `solution2_10e_pretraining/pretrained_model.ckpt`)
+
+a) Run command in the command line from /solution2_10e_pretraining 
+``` 
+python main.py --a=2 --b=3
 ```
-1 10e60 0 10e59 1 10e58 2 10e57 3 10e56 0 10e55 2 10e54 7 10e53 0 10e52
-1 10e51 0 10e50 3 10e49 9 10e48 0 10e47 5 10e46 3 10e45 1 10e44 5 10e43 3
-10e42 6 10e41 3 10e40 6 10e39 0 10e38 8 10e27 1 10e26 4 10e25 1 10e24 2 10e23
-6 10e22 6 10e21 9 10e20 5 10e19 3 10e18 4 10e17 8 10e16 3 10e15 8 10e14 8
-10e13 9 10e12 5 10e11 3 10e10 5 10e9 0 10e8 6 10e7 4 10e6 3 10e5 5 10e4 6
-10e3 7 10e2 2 10e1 2 10e0
+where `a` and `b` are the two integers to sum.
+The result would be a string: `a + b = x` where a, b - given numbers and x is the produced result.
+
+b) Use Solver2 class from /solution2_10e_pretraining/solver:
 ```
-Hence, although the model correctly emits the end-of-sequence token after the “10e0” token, it
-decides to shorten the sequence in the middle of the generation, i.e., by skipping position tokens
-“10e37” until “10e28”. This skipping behavior is consistent across model sizes, dataset sizes, and
-extrapolation ranges (e.g., training on 20 digits, evaluating on 30 digits, etc.). Investigating it further
-might help us understand why neural models often fail on extrapolation tasks.
-
-**описать остальные параметры**
-
-** IMPACT OF DATA SIZE**
-## INVESTIGATING_THE_LIMITATIONS_OF_TRANSFORM_apr21
-
-
-**увеличение числа цифр**
-One advantage of working with arithmetic tasks is that the rules to be learned are well defined and
-relatively simple. Thus, it is easy to verify if models learned such rules by evaluating them on
-numbers that are larger than the ones they were trained on. If successful, such a model would have
-no problem correctly adding or subtracting arbitrarily long numbers
-
-
-**обучать с как минимум 50 цифрами**
-Extrapolation is hardly achieved when trained on fewer than 50 digits, regardless of the model size
+solver = Solver2()
+a = 2
+b = 3
+answer_int, meta_info = solver.calc_sum(a, b)
+```
+Its main method calc_sum takes as arguments two integers to sum and returns the integer result of summation, and a dict with meta_info (i.e. the created question, model response in a 10e-based regular order numbers, etc.)
 
 
 
+#### Evaluation
+
+First the second solution was evaluated as the first one
+
+
+The results of the evaluation (with the solution answers, the expected result, time spent, generated answer in a 10e-based regular order numbers) can be found in the file `solutions_evaluation/test_examples_solution2_results.jsonl`
+
+The solution accuracy is 0.11.
+
+The correct answer was given just in 11 examples: 5 correct out of 10 with cur_d=10, 2/10 with cur_d=20, 2/10 with cur_d=30, 1/10 with cur_d=40, 1/10 with cur_d=50.
+This can be explained with the numbers the model was trained: just up to 15 digits.
+
+
+
+In two examples out of three where the solution failed the problem was that the runtime could not evaluate the generated code (with cur_d 30 and 70), and in the last one -- the answer was wrong: different sign and absolute value (with cur_d=40) 
+
+Then new evaluation data was generated:
+With the maximum amount of digits in the number `cur_d` from 2 to 16 (with step 1): for each `cur_d` the following examples were randomly generated
+* when both numbers have exactly `cur_d` digits 
+* when one number has exactly `cur_d` digits and the other one -- from 1 to `cur_d` digits
+
+In each described pattern each number was randomly made positive or negative and 3 examples of each pattern were created. This results in 90 examples in the file `solutions_evaluation/test_examples_upto15.jsonl`
+
+The solution accuracy on this data is still low: 0.188.
+
+### Conclusion
+
+
+Specifically pretrained with appropriate representations of numbers in tasks and answers LLMs can 'themselves' perform simple arithmetic operations, but their performance falls dramatically when dealing with large numbers.
+Pretraining requires a lot of computing resources. Moreover, regardless of the number of parameters and training examples, models cannot extrapolate, i.e., they fail to perform simple arithmetic when
+evaluated on inputs whose length distribution differs from the one seen during training. 
+
+
+That's why using LLMs to read natural language problems and generate programs as the intermediate
+reasoning steps, and offloading the solution step to a runtime (Python interpreter) is a more promising way to solve the given problem.
 
 
 

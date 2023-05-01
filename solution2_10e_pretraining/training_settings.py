@@ -13,19 +13,19 @@ MAX_EPOCHS = 20
 GPUS = 1
 
 
-# OUTPUT_DIR = 'first_results'
-# MODEL_NAME = 't5-base'  # t5-small, t5-base
-# MIN_DIGITS_TRAIN = 2
-# MAX_DIGITS_TRAIN = 15
-# MIN_DIGITS_TEST = 2
-# MAX_DIGITS_TEST = 15
-
 OUTPUT_DIR = 'solution2_10e_pretraining/training_results'
 MODEL_NAME = 't5-base'  # t5-small, t5-base
 MIN_DIGITS_TRAIN = 2
-MAX_DIGITS_TRAIN = 40
+MAX_DIGITS_TRAIN = 15
 MIN_DIGITS_TEST = 2
-MAX_DIGITS_TEST = 50
+MAX_DIGITS_TEST = 15
+
+# OUTPUT_DIR = 'solution2_10e_pretraining/training_results'
+# MODEL_NAME = 't5-base'  # t5-small, t5-base
+# MIN_DIGITS_TRAIN = 2
+# MAX_DIGITS_TRAIN = 40
+# MIN_DIGITS_TEST = 2
+# MAX_DIGITS_TEST = 50
 
 TRAIN_SIZE = 100000
 TRAIN_BATCH_SIZE = 4
