@@ -396,11 +396,11 @@ The solution accuracy on this data is still low: 0.188.
 
 
 Specifically pretrained with appropriate representations of numbers in tasks and answers LLMs can 'themselves' perform simple arithmetic operations, but their performance falls dramatically when dealing with large numbers.
-Pretraining requires a lot of computing resources. Moreover, regardless of the number of parameters and training examples, models cannot extrapolate, i.e., they fail to perform simple arithmetic when
-evaluated on inputs whose length distribution differs from the one seen during training. 
+Pretraining requires a lot of computing resources. Moreover, regardless of the number of parameters and training examples, models cannot extrapolate, i.e., they fail to perform simple arithmetic when evaluated on inputs whose length distribution differs from the one seen during training. 
 
 
-That's why using LLMs to read natural language problems and generate programs as the intermediate
+
+That's why зretrainig LLMs can be appropriate only if there are enough computing resources, and the length of the numbers on which they will be applied is limited. Using LLMs to read natural language problems and generate programs as the intermediate
 reasoning steps, and offloading the solution step to a runtime (Python interpreter) is a more promising way to solve the given problem.
 
 
